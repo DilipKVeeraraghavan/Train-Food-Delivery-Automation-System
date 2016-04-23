@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FoodChain.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">FoodChain.java</span></div><h1>FoodChain.java</h1><pre class="source lang-java linenums">package TGHM;
+
+
+import TGHM.DbConnect;
+import TGHM.UnableToConnectException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+public class FoodChain extends FoodSupplier {
+
+	private ArrayList&lt;RailwayStation&gt; restaurantStations;
+	private int foodChainNumberOfStations;
+
+	public ArrayList&lt;RailwayStation&gt; getRestaurantStations() {
+<span class="nc" id="L19">		return this.restaurantStations;</span>
+	}
+
+	/**
+	 * 
+	 * @param restaurantStations
+	 */
+        public FoodChain(ArrayList&lt;RailwayStation&gt; stations,String name,Cert cert,ArrayList&lt;FoodItem&gt; menu,String user,String pass,String contact)
+        {
+<span class="nc" id="L28">            super(name,cert,menu,user,pass,contact,&quot;FoodChain&quot;);</span>
+<span class="nc" id="L29">            restaurantStations = stations;</span>
+<span class="nc" id="L30">            foodChainNumberOfStations   = stations.size();</span>
+<span class="nc" id="L31">        }</span>
+        
+        
+        
+	public void setRestaurantNumberOfStations() {
+		// TODO - implement FoodChains.setRestaurantNumberOfStations
+<span class="nc" id="L37">		throw new UnsupportedOperationException();</span>
+	}
+        
+        public void storeInDb() throws UnableToConnectException,IllegalArgumentException
+        {
+<span class="nc" id="L42">            DbConnect conn = null;</span>
+<span class="nc" id="L43">            ResultSet res  = null;</span>
+            try 
+            {
+<span class="nc" id="L46">                conn = new DbConnect(&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L47">                conn.runQuery(&quot;SAVEPOINT saveOne;&quot;);</span>
+<span class="nc" id="L48">                conn.runQuery(&quot;USE tghm&quot;);</span>
+<span class="nc" id="L49">                String menu = &quot;&quot;;</span>
+<span class="nc" id="L50">                String stations = &quot;&quot;;</span>
+
+                /*Check if username exists already*/
+<span class="nc" id="L53">                res = conn.runQuery(&quot;SELECT * FROM foodsupplier WHERE Username='&quot;+username+&quot;';&quot;);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                if(res.next())</span>
+                {
+<span class="nc" id="L56">                    throw new IllegalArgumentException(&quot;Username Taken&quot;);</span>
+                }
+                
+
+                /*Now store the food supplier in db*/
+<span class="nc" id="L61">                conn.runUpdate(&quot;INSERT INTO foodsupplier (authCertPath,Menu,Name,Stations,NumberOfStations,Type,Username,Password,Status,Contact) VALUES ('&quot;+authCert.path+&quot;','&quot;+menu+&quot;','&quot;+Name+&quot;','&quot;+stations+&quot;','0','FoodChain','&quot;+username+&quot;','&quot;+password+&quot;','Unreviewed','&quot;+contact+&quot;')&quot;);     </span>
+                
+                
+                /*Commit*/
+<span class="nc" id="L65">                conn.runQuery(&quot;COMMIT;&quot;);</span>
+            } 
+<span class="nc" id="L67">            catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L71">                    conn.runQuery(&quot;ROLLBACK TO saveOne;&quot;);</span>
+                } 
+<span class="nc" id="L73">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L76">                }</span>
+<span class="nc" id="L77">                ex.printStackTrace();</span>
+<span class="nc" id="L78">                JOptionPane.showMessageDialog(null, &quot;in&quot;);</span>
+<span class="nc" id="L79">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            }
+            finally
+            {
+<span class="nc" id="L83">                try </span>
+                {
+                    /*Close connection*/
+<span class="nc" id="L86">                    res.close();</span>
+<span class="nc" id="L87">                    conn.close();</span>
+                } 
+<span class="nc" id="L89">                catch (SQLException ex) </span>
+                {
+                    
+<span class="nc" id="L92">                }</span>
+<span class="nc" id="L93">            }</span>
+<span class="nc" id="L94">    }</span>
+}   
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FoodSupplierFrame.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">FoodSupplierFrame.java</span></div><h1>FoodSupplierFrame.java</h1><pre class="source lang-java linenums">package TGHM;
+
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+public class FoodSupplierFrame extends javax.swing.JFrame {
+
+<span class="nc" id="L8">    public FoodSupplierFrame(FoodSupplierAuth authent) {</span>
+<span class="nc" id="L9">        JPanel panel = new MenuManagement(authent);</span>
+<span class="nc" id="L10">        initComponents();</span>
+<span class="nc" id="L11">        add(panel);</span>
+<span class="nc" id="L12">        panel.add(new JScrollPane());</span>
+<span class="nc" id="L13">        panel.setSize(580,617);</span>
+<span class="nc" id="L14">        this.pack();</span>
+<span class="nc" id="L15">        this.setSize(580,617);</span>
+<span class="nc" id="L16">        panel.setLocation(0,0);</span>
+<span class="nc" id="L17">        validate(); </span>
+<span class="nc" id="L18">        repaint();</span>
+<span class="nc" id="L19">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L25">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+
+<span class="nc" id="L27">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L28">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L29">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L30">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L31">            .addGap(0, 427, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L33">        layout.setVerticalGroup(</span>
+<span class="nc" id="L34">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L35">            .addGap(0, 357, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L38">        pack();</span>
+<span class="nc" id="L39">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FoodItem.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">FoodItem.java</span></div><h1>FoodItem.java</h1><pre class="source lang-java linenums">
+package TGHM;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class FoodItem {
+        private String Name;
+	private int Price;
+
+<span class="nc" id="L11">        public FoodItem(){</span>
+<span class="nc" id="L12">            Name = &quot;Roti&quot;;</span>
+<span class="nc" id="L13">            Price = 5;</span>
+<span class="nc" id="L14">        }</span>
+
+<span class="nc" id="L16">        public FoodItem(String name){</span>
+<span class="nc" id="L17">            Name = name;</span>
+<span class="nc" id="L18">            Price = 10;</span>
+<span class="nc" id="L19">        }</span>
+
+        public String getName() {
+<span class="nc" id="L22">            return Name;</span>
+	}
+
+	public void setName(String Name) {
+		// TODO - implement FoodItem.setName
+<span class="nc" id="L27">		throw new UnsupportedOperationException();</span>
+	}
+
+	public int getPrice() {
+<span class="nc" id="L31">		return Price;</span>
+	}
+
+	public void setPrice(int Price) {
+		// TODO - implement FoodItem.setPrice
+<span class="nc" id="L36">		throw new UnsupportedOperationException();</span>
+	}
+        
+         public FoodItem(String name,int price)
+<span class="nc" id="L40">        {</span>
+<span class="nc" id="L41">            Name  = name;</span>
+<span class="nc" id="L42">            Price = price;</span>
+<span class="nc" id="L43">        }</span>
+        
+        FoodItem(int Sno) throws UnableToConnectException 
+<span class="nc" id="L46">        {</span>
+<span class="nc" id="L47">            DbConnect conn = null;</span>
+<span class="nc" id="L48">            ResultSet res  = null;</span>
+            
+            try 
+            {
+<span class="nc" id="L52">                conn = new DbConnect(&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L53">                conn.runQuery(&quot;SAVEPOINT saveFive;&quot;);</span>
+<span class="nc" id="L54">                conn.runQuery(&quot;USE tghm&quot;);</span>
+                
+                /*Check if valid int, if so read*/
+<span class="nc" id="L57">                res = conn.runQuery(&quot;SELECT * FROM  fooditem WHERE Sno= '&quot;+Sno+&quot;';&quot;);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">                if(!res.next())</span>
+                {
+<span class="nc" id="L60">                    throw new IllegalArgumentException(&quot;Invalid Sno,cant read&quot;);</span>
+                }
+                else
+                {
+<span class="nc" id="L64">                    Name  = res.getString(&quot;Name&quot;);</span>
+<span class="nc" id="L65">                    Price = Integer.parseInt(res.getString(&quot;Price&quot;));</span>
+                }
+                
+                /*Commit*/
+<span class="nc" id="L69">                conn.runQuery(&quot;COMMIT;&quot;);</span>
+            }
+<span class="nc" id="L71">            catch (ClassNotFoundException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L75">                    conn.runQuery(&quot;ROLLBACK TO saveFive;&quot;);</span>
+                } 
+<span class="nc" id="L77">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L80">                }</span>
+<span class="nc" id="L81">                ex.printStackTrace();</span>
+<span class="nc" id="L82">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L84">            catch (InstantiationException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L88">                    conn.runQuery(&quot;ROLLBACK TO saveFive;&quot;);</span>
+                } 
+<span class="nc" id="L90">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L93">                }</span>
+<span class="nc" id="L94">                ex.printStackTrace();</span>
+<span class="nc" id="L95">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L97">            catch (IllegalAccessException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L101">                    conn.runQuery(&quot;ROLLBACK TO saveFive;&quot;);</span>
+                } 
+<span class="nc" id="L103">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L106">                }</span>
+<span class="nc" id="L107">                ex.printStackTrace();</span>
+<span class="nc" id="L108">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L110">            catch (SQLException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L114">                    conn.runQuery(&quot;ROLLBACK TO saveFive;&quot;);</span>
+                } 
+<span class="nc" id="L116">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L119">                }</span>
+<span class="nc" id="L120">                ex.printStackTrace();</span>
+<span class="nc" id="L121">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            }
+            finally
+            {
+<span class="nc" id="L125">                try </span>
+                {
+                    /*Close connection*/
+<span class="nc bnc" id="L128" title="All 4 branches missed.">                    if(res!=null)</span>
+<span class="nc" id="L129">                    res.close();</span>
+<span class="nc" id="L130">                    conn.close();</span>
+                } 
+<span class="nc" id="L132">                catch (SQLException ex) </span>
+                {
+                    
+<span class="nc" id="L135">                }</span>
+<span class="nc" id="L136">            }</span>
+<span class="nc" id="L137">        }</span>
+        
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

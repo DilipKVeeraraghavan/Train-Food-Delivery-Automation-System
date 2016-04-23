@@ -1,0 +1,1592 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoginPage.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">LoginPage.java</span></div><h1>LoginPage.java</h1><pre class="source lang-java linenums">package TGHM;
+
+import java.sql.*;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
+
+public class LoginPage extends javax.swing.JFrame {
+<span class="nc" id="L22">    ArrayList&lt;String&gt; cartitems = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L23">    public LoginPage() {</span>
+        try{
+<span class="nc" id="L25">            UIManager.setLookAndFeel(&quot;com.jtattoo.plaf.mint.MintLookAndFeel&quot;);</span>
+<span class="nc" id="L26">        }catch(Exception ex){</span>
+<span class="nc" id="L27">            JOptionPane.showMessageDialog(null,&quot;Warning !&quot;);</span>
+<span class="nc" id="L28">        }</span>
+<span class="nc" id="L29">        initComponents();</span>
+<span class="nc" id="L30">        LoginPane.setVisible(true);</span>
+<span class="nc" id="L31">        customerPane.setVisible(false);</span>
+<span class="nc" id="L32">        Invaliduserwarn.setVisible(false);</span>
+<span class="nc" id="L33">        jLabel11.setVisible(false);</span>
+<span class="nc" id="L34">        jLabel16.setVisible(false);</span>
+<span class="nc" id="L35">        jLabel17.setVisible(false);</span>
+<span class="nc" id="L36">        contactNo.setVisible(false);</span>
+<span class="nc" id="L37">        contactNoLabel.setVisible(false);</span>
+<span class="nc" id="L38">        Radiowarn.setVisible(false);</span>
+        
+<span class="nc" id="L40">    }</span>
+    
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L46">        jPanel1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L47">        buttonGroup1 = new javax.swing.ButtonGroup();</span>
+<span class="nc" id="L48">        buttonGroup2 = new javax.swing.ButtonGroup();</span>
+<span class="nc" id="L49">        LoginPane = new javax.swing.JPanel();</span>
+<span class="nc" id="L50">        jLabel1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L51">        jPanel2 = new javax.swing.JPanel();</span>
+<span class="nc" id="L52">        jLabel2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L53">        jLabel3 = new javax.swing.JLabel();</span>
+<span class="nc" id="L54">        Username = new javax.swing.JTextField();</span>
+<span class="nc" id="L55">        Password = new javax.swing.JTextField();</span>
+<span class="nc" id="L56">        LoginButton = new javax.swing.JButton();</span>
+<span class="nc" id="L57">        Invaliduserwarn = new javax.swing.JLabel();</span>
+<span class="nc" id="L58">        contactNoLabel = new javax.swing.JLabel();</span>
+<span class="nc" id="L59">        contactNo = new javax.swing.JTextField();</span>
+<span class="nc" id="L60">        dummy = new javax.swing.JPanel();</span>
+<span class="nc" id="L61">        ManagementButton = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L62">        CustomerButton = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L63">        FoodSupplierButton = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L64">        Radiowarn = new javax.swing.JLabel();</span>
+<span class="nc" id="L65">        AgentButton = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L66">        dummylabe = new javax.swing.JLabel();</span>
+<span class="nc" id="L67">        jPanel6 = new javax.swing.JPanel();</span>
+<span class="nc" id="L68">        customerRegister = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L69">        jButton3 = new javax.swing.JButton();</span>
+<span class="nc" id="L70">        customerPane = new javax.swing.JPanel();</span>
+<span class="nc" id="L71">        customertab = new javax.swing.JTabbedPane();</span>
+<span class="nc" id="L72">        placeOrder = new javax.swing.JPanel();</span>
+<span class="nc" id="L73">        jSplitPane1 = new javax.swing.JSplitPane();</span>
+<span class="nc" id="L74">        jPanel3 = new javax.swing.JPanel();</span>
+<span class="nc" id="L75">        trainNumber = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="nc" id="L76">        jLabel4 = new javax.swing.JLabel();</span>
+<span class="nc" id="L77">        jLabel5 = new javax.swing.JLabel();</span>
+<span class="nc" id="L78">        foodSupplier = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="nc" id="L79">        jLabel7 = new javax.swing.JLabel();</span>
+<span class="nc" id="L80">        hourCombo = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="nc" id="L81">        minuteCombo = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="nc" id="L82">        placeOrderButton = new javax.swing.JButton();</span>
+<span class="nc" id="L83">        logOut = new javax.swing.JButton();</span>
+<span class="nc" id="L84">        jLabel8 = new javax.swing.JLabel();</span>
+<span class="nc" id="L85">        jLabel9 = new javax.swing.JLabel();</span>
+<span class="nc" id="L86">        jLabel10 = new javax.swing.JLabel();</span>
+<span class="nc" id="L87">        jButton1 = new javax.swing.JButton();</span>
+<span class="nc" id="L88">        jLabel11 = new javax.swing.JLabel();</span>
+<span class="nc" id="L89">        jSplitPane2 = new javax.swing.JSplitPane();</span>
+<span class="nc" id="L90">        jScrollPane1 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L91">        jTextArea1 = new javax.swing.JTextArea();</span>
+<span class="nc" id="L92">        cartSplitPane = new javax.swing.JSplitPane();</span>
+<span class="nc" id="L93">        jPanel4 = new javax.swing.JPanel();</span>
+<span class="nc" id="L94">        jButton2 = new javax.swing.JButton();</span>
+<span class="nc" id="L95">        jLabel14 = new javax.swing.JLabel();</span>
+<span class="nc" id="L96">        cartPanel = new javax.swing.JPanel();</span>
+<span class="nc" id="L97">        jScrollPane2 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L98">        menuCart = new javax.swing.JList&lt;&gt;();</span>
+<span class="nc" id="L99">        jScrollPane3 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L100">        cart = new javax.swing.JList&lt;&gt;();</span>
+<span class="nc" id="L101">        moveButton = new javax.swing.JButton();</span>
+<span class="nc" id="L102">        jLabel12 = new javax.swing.JLabel();</span>
+<span class="nc" id="L103">        jLabel13 = new javax.swing.JLabel();</span>
+<span class="nc" id="L104">        countCart = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="nc" id="L105">        jLabel6 = new javax.swing.JLabel();</span>
+<span class="nc" id="L106">        jLabel16 = new javax.swing.JLabel();</span>
+<span class="nc" id="L107">        jLabel17 = new javax.swing.JLabel();</span>
+<span class="nc" id="L108">        jPanel5 = new javax.swing.JPanel();</span>
+<span class="nc" id="L109">        jScrollPane4 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L110">        tableAgent = new javax.swing.JTable();</span>
+<span class="nc" id="L111">        modifyPane = new javax.swing.JPanel();</span>
+<span class="nc" id="L112">        jLabel15 = new javax.swing.JLabel();</span>
+<span class="nc" id="L113">        modifyRB = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L114">        CancelRB = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L115">        Proceed = new javax.swing.JButton();</span>
+<span class="nc" id="L116">        jPanel8 = new javax.swing.JPanel();</span>
+<span class="nc" id="L117">        jPanel9 = new javax.swing.JPanel();</span>
+
+<span class="nc" id="L119">        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);</span>
+<span class="nc" id="L120">        jPanel1.setLayout(jPanel1Layout);</span>
+<span class="nc" id="L121">        jPanel1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L122">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L123">            .addGap(0, 100, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L125">        jPanel1Layout.setVerticalGroup(</span>
+<span class="nc" id="L126">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L127">            .addGap(0, 100, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L130">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+
+<span class="nc" id="L132">        jLabel1.setFont(new java.awt.Font(&quot;Bookman Old Style&quot;, 3, 24)); // NOI18N</span>
+<span class="nc" id="L133">        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L134">        jLabel1.setText(&quot;Travel In Good Health Management&quot;);</span>
+
+<span class="nc" id="L136">        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));</span>
+
+<span class="nc" id="L138">        jLabel2.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L139">        jLabel2.setText(&quot;Username :&quot;);</span>
+
+<span class="nc" id="L141">        jLabel3.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L142">        jLabel3.setText(&quot;Password :&quot;);</span>
+
+<span class="nc" id="L144">        Username.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L145">        Username.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L147">                UsernameActionPerformed(evt);</span>
+<span class="nc" id="L148">            }</span>
+        });
+
+<span class="nc" id="L151">        Password.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 14)); // NOI18N</span>
+
+<span class="nc" id="L153">        LoginButton.setText(&quot;LogIn / Register&quot;);</span>
+<span class="nc" id="L154">        LoginButton.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L156">                LoginButtonActionPerformed(evt);</span>
+<span class="nc" id="L157">            }</span>
+        });
+
+<span class="nc" id="L160">        Invaliduserwarn.setFont(new java.awt.Font(&quot;Dialog&quot;, 2, 14)); // NOI18N</span>
+<span class="nc" id="L161">        Invaliduserwarn.setForeground(new java.awt.Color(255, 0, 0));</span>
+<span class="nc" id="L162">        Invaliduserwarn.setText(&quot;Invalid Username or Password !&quot;);</span>
+
+<span class="nc" id="L164">        contactNoLabel.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L165">        contactNoLabel.setText(&quot;Contact :&quot;);</span>
+
+<span class="nc" id="L167">        contactNo.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L169">                contactNoActionPerformed(evt);</span>
+<span class="nc" id="L170">            }</span>
+        });
+
+<span class="nc" id="L173">        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);</span>
+<span class="nc" id="L174">        jPanel2.setLayout(jPanel2Layout);</span>
+<span class="nc" id="L175">        jPanel2Layout.setHorizontalGroup(</span>
+<span class="nc" id="L176">            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L177">            .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L178">                .addContainerGap()</span>
+<span class="nc" id="L179">                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L180">                    .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L181">                        .addComponent(contactNoLabel)</span>
+<span class="nc" id="L182">                        .addGap(40, 40, 40)</span>
+<span class="nc" id="L183">                        .addComponent(contactNo))</span>
+<span class="nc" id="L184">                    .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L185">                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L186">                            .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L187">                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L188">                                    .addComponent(jLabel2)</span>
+<span class="nc" id="L189">                                    .addComponent(jLabel3))</span>
+<span class="nc" id="L190">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L191">                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L192">                                    .addComponent(Password, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)</span>
+<span class="nc" id="L193">                                    .addComponent(Username)))</span>
+<span class="nc" id="L194">                            .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L195">                                .addGap(32, 32, 32)</span>
+<span class="nc" id="L196">                                .addComponent(Invaliduserwarn)))</span>
+<span class="nc" id="L197">                        .addGap(0, 0, Short.MAX_VALUE))</span>
+<span class="nc" id="L198">                    .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L199">                        .addGap(0, 0, Short.MAX_VALUE)</span>
+<span class="nc" id="L200">                        .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L201">                .addContainerGap())</span>
+        );
+<span class="nc" id="L203">        jPanel2Layout.setVerticalGroup(</span>
+<span class="nc" id="L204">            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L205">            .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L206">                .addGap(32, 32, 32)</span>
+<span class="nc" id="L207">                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L208">                    .addComponent(jLabel2)</span>
+<span class="nc" id="L209">                    .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L210">                .addGap(24, 24, 24)</span>
+<span class="nc" id="L211">                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L212">                    .addComponent(jLabel3)</span>
+<span class="nc" id="L213">                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L214">                .addGap(31, 31, 31)</span>
+<span class="nc" id="L215">                .addComponent(Invaliduserwarn)</span>
+<span class="nc" id="L216">                .addGap(57, 57, 57)</span>
+<span class="nc" id="L217">                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L218">                    .addComponent(contactNoLabel)</span>
+<span class="nc" id="L219">                    .addComponent(contactNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L220">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L221">                .addComponent(LoginButton)</span>
+<span class="nc" id="L222">                .addContainerGap())</span>
+        );
+
+<span class="nc" id="L225">        dummy.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;Login as -&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Dialog&quot;, 2, 14))); // NOI18N</span>
+<span class="nc" id="L226">        dummy.setMinimumSize(new java.awt.Dimension(335, 205));</span>
+
+<span class="nc" id="L228">        buttonGroup1.add(ManagementButton);</span>
+<span class="nc" id="L229">        ManagementButton.setText(&quot;Management&quot;);</span>
+<span class="nc" id="L230">        ManagementButton.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L232">                ManagementButtonActionPerformed(evt);</span>
+<span class="nc" id="L233">            }</span>
+        });
+
+<span class="nc" id="L236">        buttonGroup1.add(CustomerButton);</span>
+<span class="nc" id="L237">        CustomerButton.setText(&quot;Customer&quot;);</span>
+<span class="nc" id="L238">        CustomerButton.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L240">                CustomerButtonActionPerformed(evt);</span>
+<span class="nc" id="L241">            }</span>
+        });
+
+<span class="nc" id="L244">        buttonGroup1.add(FoodSupplierButton);</span>
+<span class="nc" id="L245">        FoodSupplierButton.setText(&quot;Food Supplier&quot;);</span>
+<span class="nc" id="L246">        FoodSupplierButton.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L248">                FoodSupplierButtonActionPerformed(evt);</span>
+<span class="nc" id="L249">            }</span>
+        });
+
+<span class="nc" id="L252">        Radiowarn.setFont(new java.awt.Font(&quot;Dialog&quot;, 2, 11)); // NOI18N</span>
+<span class="nc" id="L253">        Radiowarn.setForeground(new java.awt.Color(255, 0, 0));</span>
+<span class="nc" id="L254">        Radiowarn.setText(&quot;Please select the kind of user above !&quot;);</span>
+
+<span class="nc" id="L256">        buttonGroup1.add(AgentButton);</span>
+<span class="nc" id="L257">        AgentButton.setText(&quot;Agent&quot;);</span>
+<span class="nc" id="L258">        AgentButton.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L260">                AgentButtonActionPerformed(evt);</span>
+<span class="nc" id="L261">            }</span>
+        });
+
+<span class="nc" id="L264">        javax.swing.GroupLayout dummyLayout = new javax.swing.GroupLayout(dummy);</span>
+<span class="nc" id="L265">        dummy.setLayout(dummyLayout);</span>
+<span class="nc" id="L266">        dummyLayout.setHorizontalGroup(</span>
+<span class="nc" id="L267">            dummyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L268">            .addGroup(dummyLayout.createSequentialGroup()</span>
+<span class="nc" id="L269">                .addContainerGap()</span>
+<span class="nc" id="L270">                .addGroup(dummyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L271">                    .addGroup(dummyLayout.createSequentialGroup()</span>
+<span class="nc" id="L272">                        .addGroup(dummyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L273">                            .addComponent(CustomerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L274">                            .addComponent(FoodSupplierButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L275">                            .addComponent(Radiowarn, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)</span>
+<span class="nc" id="L276">                            .addComponent(dummylabe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L277">                        .addGap(0, 16, Short.MAX_VALUE))</span>
+<span class="nc" id="L278">                    .addGroup(dummyLayout.createSequentialGroup()</span>
+<span class="nc" id="L279">                        .addComponent(ManagementButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L280">                        .addGap(16, 16, 16)</span>
+<span class="nc" id="L281">                        .addComponent(AgentButton)))</span>
+<span class="nc" id="L282">                .addContainerGap())</span>
+        );
+<span class="nc" id="L284">        dummyLayout.setVerticalGroup(</span>
+<span class="nc" id="L285">            dummyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L286">            .addGroup(dummyLayout.createSequentialGroup()</span>
+<span class="nc" id="L287">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L288">                .addGroup(dummyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L289">                    .addComponent(ManagementButton)</span>
+<span class="nc" id="L290">                    .addComponent(AgentButton))</span>
+<span class="nc" id="L291">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L292">                .addComponent(CustomerButton)</span>
+<span class="nc" id="L293">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L294">                .addComponent(FoodSupplierButton)</span>
+<span class="nc" id="L295">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L296">                .addComponent(Radiowarn)</span>
+<span class="nc" id="L297">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L298">                .addComponent(dummylabe)</span>
+<span class="nc" id="L299">                .addContainerGap())</span>
+        );
+
+<span class="nc" id="L302">        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;Register As&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Dialog&quot;, 2, 14))); // NOI18N</span>
+
+<span class="nc" id="L304">        buttonGroup1.add(customerRegister);</span>
+<span class="nc" id="L305">        customerRegister.setText(&quot;Customer&quot;);</span>
+<span class="nc" id="L306">        customerRegister.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L308">                customerRegisterActionPerformed(evt);</span>
+<span class="nc" id="L309">            }</span>
+        });
+
+<span class="nc" id="L312">        jButton3.setText(&quot;Food Supplier Registration&quot;);</span>
+<span class="nc" id="L313">        jButton3.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L315">                jButton3ActionPerformed(evt);</span>
+<span class="nc" id="L316">            }</span>
+        });
+
+<span class="nc" id="L319">        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);</span>
+<span class="nc" id="L320">        jPanel6.setLayout(jPanel6Layout);</span>
+<span class="nc" id="L321">        jPanel6Layout.setHorizontalGroup(</span>
+<span class="nc" id="L322">            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L323">            .addGroup(jPanel6Layout.createSequentialGroup()</span>
+<span class="nc" id="L324">                .addContainerGap()</span>
+<span class="nc" id="L325">                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L326">                    .addComponent(customerRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L327">                    .addComponent(jButton3))</span>
+<span class="nc" id="L328">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L330">        jPanel6Layout.setVerticalGroup(</span>
+<span class="nc" id="L331">            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L332">            .addGroup(jPanel6Layout.createSequentialGroup()</span>
+<span class="nc" id="L333">                .addContainerGap()</span>
+<span class="nc" id="L334">                .addComponent(customerRegister)</span>
+<span class="nc" id="L335">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)</span>
+<span class="nc" id="L336">                .addComponent(jButton3)</span>
+<span class="nc" id="L337">                .addContainerGap())</span>
+        );
+
+<span class="nc" id="L340">        javax.swing.GroupLayout LoginPaneLayout = new javax.swing.GroupLayout(LoginPane);</span>
+<span class="nc" id="L341">        LoginPane.setLayout(LoginPaneLayout);</span>
+<span class="nc" id="L342">        LoginPaneLayout.setHorizontalGroup(</span>
+<span class="nc" id="L343">            LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L344">            .addGroup(LoginPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L345">                .addContainerGap()</span>
+<span class="nc" id="L346">                .addGroup(LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L347">                    .addGroup(LoginPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L348">                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L349">                        .addContainerGap())</span>
+<span class="nc" id="L350">                    .addGroup(LoginPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L351">                        .addGroup(LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L352">                            .addComponent(dummy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L353">                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L354">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 386, Short.MAX_VALUE)</span>
+<span class="nc" id="L355">                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))</span>
+        );
+<span class="nc" id="L357">        LoginPaneLayout.setVerticalGroup(</span>
+<span class="nc" id="L358">            LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L359">            .addGroup(LoginPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L360">                .addContainerGap()</span>
+<span class="nc" id="L361">                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L362">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L363">                .addGroup(LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L364">                    .addGroup(LoginPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L365">                        .addComponent(dummy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L366">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L367">                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L368">                        .addContainerGap())</span>
+<span class="nc" id="L369">                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))</span>
+        );
+
+<span class="nc" id="L372">        customertab.setBorder(javax.swing.BorderFactory.createEtchedBorder());</span>
+<span class="nc" id="L373">        customertab.setTabPlacement(javax.swing.JTabbedPane.LEFT);</span>
+<span class="nc" id="L374">        customertab.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 14)); // NOI18N</span>
+
+<span class="nc" id="L376">        placeOrder.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));</span>
+
+<span class="nc" id="L378">        jSplitPane1.setDividerLocation(263);</span>
+
+<span class="nc" id="L380">        trainNumber.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L382">                trainNumberActionPerformed(evt);</span>
+<span class="nc" id="L383">            }</span>
+        });
+
+<span class="nc" id="L386">        jLabel4.setText(&quot;Train Number :&quot;);</span>
+
+<span class="nc" id="L388">        jLabel5.setText(&quot;Food Supplier :&quot;);</span>
+
+<span class="nc" id="L390">        foodSupplier.addItemListener(new java.awt.event.ItemListener() {</span>
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+<span class="nc" id="L392">                foodSupplierItemStateChanged(evt);</span>
+<span class="nc" id="L393">            }</span>
+        });
+<span class="nc" id="L395">        foodSupplier.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L397">                foodSupplierActionPerformed(evt);</span>
+<span class="nc" id="L398">            }</span>
+        });
+
+<span class="nc" id="L401">        jLabel7.setText(&quot;Time of Delivery :&quot;);</span>
+
+<span class="nc" id="L403">        hourCombo.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot; }));</span>
+<span class="nc" id="L404">        hourCombo.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L406">                hourComboActionPerformed(evt);</span>
+<span class="nc" id="L407">            }</span>
+        });
+
+<span class="nc" id="L410">        minuteCombo.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;, &quot;24&quot;, &quot;25&quot;, &quot;26&quot;, &quot;27&quot;, &quot;28&quot;, &quot;29&quot;, &quot;30&quot;, &quot;31&quot;, &quot;32&quot;, &quot;33&quot;, &quot;34&quot;, &quot;35&quot;, &quot;36&quot;, &quot;37&quot;, &quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;, &quot;45&quot;, &quot;46&quot;, &quot;47&quot;, &quot;48&quot;, &quot;49&quot;, &quot;50&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;, &quot;55&quot;, &quot;56&quot;, &quot;57&quot;, &quot;58&quot;, &quot;59&quot; }));</span>
+<span class="nc" id="L411">        minuteCombo.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L413">                minuteComboActionPerformed(evt);</span>
+<span class="nc" id="L414">            }</span>
+        });
+
+<span class="nc" id="L417">        placeOrderButton.setText(&quot;Place Order&quot;);</span>
+<span class="nc" id="L418">        placeOrderButton.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L420">                placeOrderButtonActionPerformed(evt);</span>
+<span class="nc" id="L421">            }</span>
+        });
+
+<span class="nc" id="L424">        logOut.setText(&quot;Log Out&quot;);</span>
+<span class="nc" id="L425">        logOut.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L427">                logOutActionPerformed(evt);</span>
+<span class="nc" id="L428">            }</span>
+        });
+
+<span class="nc" id="L431">        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L432">        jLabel8.setText(&quot;:&quot;);</span>
+
+<span class="nc" id="L434">        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L435">        jLabel9.setText(&quot;HH&quot;);</span>
+
+<span class="nc" id="L437">        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L438">        jLabel10.setText(&quot;MM&quot;);</span>
+
+<span class="nc" id="L440">        jButton1.setText(&quot;Automatic Suggest&quot;);</span>
+<span class="nc" id="L441">        jButton1.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L443">                jButton1ActionPerformed(evt);</span>
+<span class="nc" id="L444">            }</span>
+        });
+
+<span class="nc" id="L447">        jLabel11.setFont(new java.awt.Font(&quot;Dialog&quot;, 2, 11)); // NOI18N</span>
+<span class="nc" id="L448">        jLabel11.setText(&quot;Please Save the cart before ordering !&quot;);</span>
+
+<span class="nc" id="L450">        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);</span>
+<span class="nc" id="L451">        jPanel3.setLayout(jPanel3Layout);</span>
+<span class="nc" id="L452">        jPanel3Layout.setHorizontalGroup(</span>
+<span class="nc" id="L453">            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L454">            .addGroup(jPanel3Layout.createSequentialGroup()</span>
+<span class="nc" id="L455">                .addContainerGap()</span>
+<span class="nc" id="L456">                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L457">                    .addGroup(jPanel3Layout.createSequentialGroup()</span>
+<span class="nc" id="L458">                        .addComponent(logOut, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L459">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L460">                        .addComponent(placeOrderButton))</span>
+<span class="nc" id="L461">                    .addGroup(jPanel3Layout.createSequentialGroup()</span>
+<span class="nc" id="L462">                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L463">                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L464">                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()</span>
+<span class="nc" id="L465">                                .addComponent(jLabel4)</span>
+<span class="nc" id="L466">                                .addGap(31, 31, 31)</span>
+<span class="nc" id="L467">                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L468">                                    .addComponent(trainNumber, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L469">                                    .addComponent(foodSupplier, 0, 126, Short.MAX_VALUE)))</span>
+<span class="nc" id="L470">                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L471">                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()</span>
+<span class="nc" id="L472">                                .addComponent(jLabel7)</span>
+<span class="nc" id="L473">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L474">                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L475">                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L476">                                    .addComponent(hourCombo, 0, 49, Short.MAX_VALUE))</span>
+<span class="nc" id="L477">                                .addGap(4, 4, 4)</span>
+<span class="nc" id="L478">                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L479">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L480">                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L481">                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L482">                                    .addComponent(minuteCombo, 0, 49, Short.MAX_VALUE))))</span>
+<span class="nc" id="L483">                        .addGap(0, 11, Short.MAX_VALUE))</span>
+<span class="nc" id="L484">                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L485">                .addContainerGap())</span>
+        );
+<span class="nc" id="L487">        jPanel3Layout.setVerticalGroup(</span>
+<span class="nc" id="L488">            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L489">            .addGroup(jPanel3Layout.createSequentialGroup()</span>
+<span class="nc" id="L490">                .addContainerGap()</span>
+<span class="nc" id="L491">                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L492">                    .addComponent(jLabel4)</span>
+<span class="nc" id="L493">                    .addComponent(trainNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L494">                .addGap(42, 42, 42)</span>
+<span class="nc" id="L495">                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L496">                    .addComponent(jLabel5)</span>
+<span class="nc" id="L497">                    .addComponent(foodSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L498">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L499">                .addComponent(jButton1)</span>
+<span class="nc" id="L500">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)</span>
+<span class="nc" id="L501">                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L502">                    .addComponent(jLabel7)</span>
+<span class="nc" id="L503">                    .addComponent(hourCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L504">                    .addComponent(jLabel8)</span>
+<span class="nc" id="L505">                    .addComponent(minuteCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L506">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L507">                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L508">                    .addComponent(jLabel9)</span>
+<span class="nc" id="L509">                    .addComponent(jLabel10))</span>
+<span class="nc" id="L510">                .addGap(34, 34, 34)</span>
+<span class="nc" id="L511">                .addComponent(jLabel11)</span>
+<span class="nc" id="L512">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L513">                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L514">                    .addComponent(placeOrderButton)</span>
+<span class="nc" id="L515">                    .addComponent(logOut))</span>
+<span class="nc" id="L516">                .addContainerGap())</span>
+        );
+
+<span class="nc" id="L519">        jSplitPane1.setLeftComponent(jPanel3);</span>
+
+<span class="nc" id="L521">        jSplitPane2.setDividerLocation(123);</span>
+<span class="nc" id="L522">        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);</span>
+
+<span class="nc" id="L524">        jTextArea1.setColumns(20);</span>
+<span class="nc" id="L525">        jTextArea1.setRows(5);</span>
+<span class="nc" id="L526">        jScrollPane1.setViewportView(jTextArea1);</span>
+
+<span class="nc" id="L528">        jSplitPane2.setTopComponent(jScrollPane1);</span>
+
+<span class="nc" id="L530">        cartSplitPane.setDividerLocation(271);</span>
+<span class="nc" id="L531">        cartSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);</span>
+
+<span class="nc" id="L533">        jButton2.setText(&quot;Save Cart&quot;);</span>
+<span class="nc" id="L534">        jButton2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L536">                jButton2ActionPerformed(evt);</span>
+<span class="nc" id="L537">            }</span>
+        });
+
+<span class="nc" id="L540">        jLabel14.setText(&quot;Please Select an item from the Menu and click the number of items and click move to add To the Cart&quot;);</span>
+
+<span class="nc" id="L542">        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);</span>
+<span class="nc" id="L543">        jPanel4.setLayout(jPanel4Layout);</span>
+<span class="nc" id="L544">        jPanel4Layout.setHorizontalGroup(</span>
+<span class="nc" id="L545">            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L546">            .addGroup(jPanel4Layout.createSequentialGroup()</span>
+<span class="nc" id="L547">                .addContainerGap()</span>
+<span class="nc" id="L548">                .addComponent(jLabel14)</span>
+<span class="nc" id="L549">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L550">                .addComponent(jButton2)</span>
+<span class="nc" id="L551">                .addContainerGap())</span>
+        );
+<span class="nc" id="L553">        jPanel4Layout.setVerticalGroup(</span>
+<span class="nc" id="L554">            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L555">            .addGroup(jPanel4Layout.createSequentialGroup()</span>
+<span class="nc" id="L556">                .addContainerGap()</span>
+<span class="nc" id="L557">                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L558">                    .addComponent(jButton2)</span>
+<span class="nc" id="L559">                    .addComponent(jLabel14))</span>
+<span class="nc" id="L560">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L563">        cartSplitPane.setBottomComponent(jPanel4);</span>
+
+<span class="nc" id="L565">        cartPanel.setMinimumSize(new java.awt.Dimension(640, 276));</span>
+
+<span class="nc" id="L567">        menuCart.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);</span>
+<span class="nc" id="L568">        jScrollPane2.setViewportView(menuCart);</span>
+
+<span class="nc" id="L570">        jScrollPane3.setViewportView(cart);</span>
+
+<span class="nc" id="L572">        moveButton.setFont(new java.awt.Font(&quot;Dialog&quot;, 2, 12)); // NOI18N</span>
+<span class="nc" id="L573">        moveButton.setText(&quot;----Move---&gt;&quot;);</span>
+<span class="nc" id="L574">        moveButton.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L576">                moveButtonActionPerformed(evt);</span>
+<span class="nc" id="L577">            }</span>
+        });
+
+<span class="nc" id="L580">        jLabel12.setText(&quot;Your Cart :&quot;);</span>
+
+<span class="nc" id="L582">        jLabel13.setText(&quot;Menu :&quot;);</span>
+
+<span class="nc" id="L584">        countCart.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot; }));</span>
+<span class="nc" id="L585">        countCart.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L587">                countCartActionPerformed(evt);</span>
+<span class="nc" id="L588">            }</span>
+        });
+
+<span class="nc" id="L591">        jLabel6.setFont(new java.awt.Font(&quot;Dialog&quot;, 2, 12)); // NOI18N</span>
+<span class="nc" id="L592">        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L593">        jLabel6.setText(&quot;Item Count :&quot;);</span>
+
+<span class="nc" id="L595">        jLabel16.setFont(new java.awt.Font(&quot;Dialog&quot;, 2, 11)); // NOI18N</span>
+<span class="nc" id="L596">        jLabel16.setForeground(new java.awt.Color(255, 0, 51));</span>
+<span class="nc" id="L597">        jLabel16.setText(&quot;Please select  one or more &quot;);</span>
+
+<span class="nc" id="L599">        jLabel17.setFont(new java.awt.Font(&quot;Dialog&quot;, 2, 11)); // NOI18N</span>
+<span class="nc" id="L600">        jLabel17.setForeground(new java.awt.Color(255, 0, 51));</span>
+<span class="nc" id="L601">        jLabel17.setText(&quot;items before saving !&quot;);</span>
+
+<span class="nc" id="L603">        javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);</span>
+<span class="nc" id="L604">        cartPanel.setLayout(cartPanelLayout);</span>
+<span class="nc" id="L605">        cartPanelLayout.setHorizontalGroup(</span>
+<span class="nc" id="L606">            cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L607">            .addGroup(cartPanelLayout.createSequentialGroup()</span>
+<span class="nc" id="L608">                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L609">                    .addGroup(cartPanelLayout.createSequentialGroup()</span>
+<span class="nc" id="L610">                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L611">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L612">                        .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L613">                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L614">                            .addGroup(cartPanelLayout.createSequentialGroup()</span>
+<span class="nc" id="L615">                                .addGap(12, 12, 12)</span>
+<span class="nc" id="L616">                                .addComponent(countCart, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L617">                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L618">                            .addComponent(jLabel17)</span>
+<span class="nc" id="L619">                            .addComponent(moveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))</span>
+<span class="nc" id="L620">                    .addComponent(jLabel13))</span>
+<span class="nc" id="L621">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L622">                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L623">                    .addComponent(jLabel12)</span>
+<span class="nc" id="L624">                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+        );
+<span class="nc" id="L626">        cartPanelLayout.setVerticalGroup(</span>
+<span class="nc" id="L627">            cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L628">            .addGroup(cartPanelLayout.createSequentialGroup()</span>
+<span class="nc" id="L629">                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L630">                    .addComponent(jLabel12)</span>
+<span class="nc" id="L631">                    .addComponent(jLabel13))</span>
+<span class="nc" id="L632">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L633">                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L634">                    .addGroup(cartPanelLayout.createSequentialGroup()</span>
+<span class="nc" id="L635">                        .addComponent(jLabel6)</span>
+<span class="nc" id="L636">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L637">                        .addComponent(countCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L638">                        .addGap(74, 74, 74)</span>
+<span class="nc" id="L639">                        .addComponent(jLabel16)</span>
+<span class="nc" id="L640">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L641">                        .addComponent(jLabel17)</span>
+<span class="nc" id="L642">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)</span>
+<span class="nc" id="L643">                        .addComponent(moveButton)</span>
+<span class="nc" id="L644">                        .addContainerGap())</span>
+<span class="nc" id="L645">                    .addComponent(jScrollPane2)</span>
+<span class="nc" id="L646">                    .addComponent(jScrollPane3)))</span>
+        );
+
+<span class="nc" id="L649">        cartSplitPane.setLeftComponent(cartPanel);</span>
+
+<span class="nc" id="L651">        jSplitPane2.setRightComponent(cartSplitPane);</span>
+
+<span class="nc" id="L653">        jPanel5.setMinimumSize(new java.awt.Dimension(642, 120));</span>
+
+<span class="nc" id="L655">        jScrollPane4.setPreferredSize(new java.awt.Dimension(642, 120));</span>
+
+<span class="nc" id="L657">        tableAgent.setFont(new java.awt.Font(&quot;Dialog&quot;, 2, 11)); // NOI18N</span>
+<span class="nc" id="L658">        tableAgent.setModel(new javax.swing.table.DefaultTableModel(</span>
+            new Object [][] {
+
+            },
+            new String [] {
+                &quot;Ranking&quot;, &quot;Restaurant - Agent &quot;, &quot;Successful Orders&quot;, &quot;Total Deliveries&quot;
+            }
+<span class="nc" id="L665">        ) {</span>
+<span class="nc" id="L666">            Class[] types = new Class [] {</span>
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class
+            };
+<span class="nc" id="L669">            boolean[] canEdit = new boolean [] {</span>
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+<span class="nc" id="L674">                return types [columnIndex];</span>
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+<span class="nc" id="L678">                return canEdit [columnIndex];</span>
+            }
+        });
+<span class="nc" id="L681">        tableAgent.setPreferredSize(new java.awt.Dimension(642, 120));</span>
+<span class="nc" id="L682">        jScrollPane4.setViewportView(tableAgent);</span>
+
+<span class="nc" id="L684">        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);</span>
+<span class="nc" id="L685">        jPanel5.setLayout(jPanel5Layout);</span>
+<span class="nc" id="L686">        jPanel5Layout.setHorizontalGroup(</span>
+<span class="nc" id="L687">            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L688">            .addGap(0, 642, Short.MAX_VALUE)</span>
+<span class="nc" id="L689">            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L690">                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L692">        jPanel5Layout.setVerticalGroup(</span>
+<span class="nc" id="L693">            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L694">            .addGap(0, 122, Short.MAX_VALUE)</span>
+<span class="nc" id="L695">            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L696">                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L699">        jSplitPane2.setTopComponent(jPanel5);</span>
+
+<span class="nc" id="L701">        jSplitPane1.setRightComponent(jSplitPane2);</span>
+
+<span class="nc" id="L703">        javax.swing.GroupLayout placeOrderLayout = new javax.swing.GroupLayout(placeOrder);</span>
+<span class="nc" id="L704">        placeOrder.setLayout(placeOrderLayout);</span>
+<span class="nc" id="L705">        placeOrderLayout.setHorizontalGroup(</span>
+<span class="nc" id="L706">            placeOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L707">            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)</span>
+        );
+<span class="nc" id="L709">        placeOrderLayout.setVerticalGroup(</span>
+<span class="nc" id="L710">            placeOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L711">            .addComponent(jSplitPane1)</span>
+        );
+
+<span class="nc" id="L714">        customertab.addTab(&quot;Place Order&quot;, placeOrder);</span>
+
+<span class="nc" id="L716">        jLabel15.setFont(new java.awt.Font(&quot;Dialog&quot;, 3, 24)); // NOI18N</span>
+<span class="nc" id="L717">        jLabel15.setText(&quot;We're sorry to let you know that your order has been rejected by the agent ......&quot;);</span>
+
+<span class="nc" id="L719">        buttonGroup2.add(modifyRB);</span>
+<span class="nc" id="L720">        modifyRB.setText(&quot;Modify Order&quot;);</span>
+<span class="nc" id="L721">        modifyRB.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L723">                modifyRBActionPerformed(evt);</span>
+<span class="nc" id="L724">            }</span>
+        });
+
+<span class="nc" id="L727">        buttonGroup2.add(CancelRB);</span>
+<span class="nc" id="L728">        CancelRB.setText(&quot;Cancel Order&quot;);</span>
+<span class="nc" id="L729">        CancelRB.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L731">                CancelRBActionPerformed(evt);</span>
+<span class="nc" id="L732">            }</span>
+        });
+
+<span class="nc" id="L735">        Proceed.setText(&quot;Proceed&quot;);</span>
+<span class="nc" id="L736">        Proceed.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L738">                ProceedActionPerformed(evt);</span>
+<span class="nc" id="L739">            }</span>
+        });
+
+<span class="nc" id="L742">        jPanel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));</span>
+
+<span class="nc" id="L744">        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);</span>
+<span class="nc" id="L745">        jPanel8.setLayout(jPanel8Layout);</span>
+<span class="nc" id="L746">        jPanel8Layout.setHorizontalGroup(</span>
+<span class="nc" id="L747">            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L748">            .addGap(0, 281, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L750">        jPanel8Layout.setVerticalGroup(</span>
+<span class="nc" id="L751">            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L752">            .addGap(0, 0, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L755">        jPanel9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));</span>
+
+<span class="nc" id="L757">        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);</span>
+<span class="nc" id="L758">        jPanel9.setLayout(jPanel9Layout);</span>
+<span class="nc" id="L759">        jPanel9Layout.setHorizontalGroup(</span>
+<span class="nc" id="L760">            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L761">            .addGap(0, 310, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L763">        jPanel9Layout.setVerticalGroup(</span>
+<span class="nc" id="L764">            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L765">            .addGap(0, 0, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L768">        javax.swing.GroupLayout modifyPaneLayout = new javax.swing.GroupLayout(modifyPane);</span>
+<span class="nc" id="L769">        modifyPane.setLayout(modifyPaneLayout);</span>
+<span class="nc" id="L770">        modifyPaneLayout.setHorizontalGroup(</span>
+<span class="nc" id="L771">            modifyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L772">            .addGroup(modifyPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L773">                .addContainerGap()</span>
+<span class="nc" id="L774">                .addGroup(modifyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L775">                    .addGroup(modifyPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L776">                        .addComponent(jLabel15)</span>
+<span class="nc" id="L777">                        .addGap(0, 0, Short.MAX_VALUE))</span>
+<span class="nc" id="L778">                    .addGroup(modifyPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L779">                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L780">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L781">                        .addGroup(modifyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L782">                            .addComponent(CancelRB)</span>
+<span class="nc" id="L783">                            .addComponent(modifyRB, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)</span>
+<span class="nc" id="L784">                            .addComponent(Proceed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L785">                        .addGap(56, 56, 56)</span>
+<span class="nc" id="L786">                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L787">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L789">        modifyPaneLayout.setVerticalGroup(</span>
+<span class="nc" id="L790">            modifyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L791">            .addGroup(modifyPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L792">                .addContainerGap()</span>
+<span class="nc" id="L793">                .addComponent(jLabel15)</span>
+<span class="nc" id="L794">                .addGroup(modifyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L795">                    .addGroup(modifyPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L796">                        .addGap(29, 29, 29)</span>
+<span class="nc" id="L797">                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L798">                    .addGroup(modifyPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L799">                        .addGap(43, 43, 43)</span>
+<span class="nc" id="L800">                        .addGroup(modifyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L801">                            .addGroup(modifyPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L802">                                .addComponent(CancelRB)</span>
+<span class="nc" id="L803">                                .addGap(18, 18, 18)</span>
+<span class="nc" id="L804">                                .addComponent(modifyRB)</span>
+<span class="nc" id="L805">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)</span>
+<span class="nc" id="L806">                                .addComponent(Proceed))</span>
+<span class="nc" id="L807">                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L808">                        .addContainerGap())))</span>
+        );
+
+<span class="nc" id="L811">        customertab.addTab(&quot;Modify/Cancel&quot;, modifyPane);</span>
+
+<span class="nc" id="L813">        javax.swing.GroupLayout customerPaneLayout = new javax.swing.GroupLayout(customerPane);</span>
+<span class="nc" id="L814">        customerPane.setLayout(customerPaneLayout);</span>
+<span class="nc" id="L815">        customerPaneLayout.setHorizontalGroup(</span>
+<span class="nc" id="L816">            customerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L817">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L818">                .addContainerGap()</span>
+<span class="nc" id="L819">                .addComponent(customertab)</span>
+<span class="nc" id="L820">                .addContainerGap())</span>
+        );
+<span class="nc" id="L822">        customerPaneLayout.setVerticalGroup(</span>
+<span class="nc" id="L823">            customerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L824">            .addGroup(customerPaneLayout.createSequentialGroup()</span>
+<span class="nc" id="L825">                .addContainerGap()</span>
+<span class="nc" id="L826">                .addComponent(customertab)</span>
+<span class="nc" id="L827">                .addContainerGap())</span>
+        );
+
+<span class="nc" id="L830">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L831">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L832">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L833">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L834">            .addComponent(LoginPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L835">            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L836">                .addComponent(customerPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L838">        layout.setVerticalGroup(</span>
+<span class="nc" id="L839">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L840">            .addComponent(LoginPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L841">            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L842">                .addComponent(customerPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L845">        pack();</span>
+<span class="nc" id="L846">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void ManagementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagementButtonActionPerformed
+<span class="nc" id="L849">        contactNo.setVisible(false);</span>
+<span class="nc" id="L850">        contactNoLabel.setVisible(false);</span>
+        
+            
+<span class="nc" id="L853">    }//GEN-LAST:event_ManagementButtonActionPerformed</span>
+
+    private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L857">    }//GEN-LAST:event_UsernameActionPerformed</span>
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+<span class="nc bnc" id="L860" title="All 2 branches missed.">        if(FoodSupplierButton.isSelected()==true){</span>
+<span class="nc" id="L861">            contactNo.setVisible(false);</span>
+<span class="nc" id="L862">            contactNoLabel.setVisible(false);</span>
+           
+<span class="nc" id="L864">            Radiowarn.setVisible(false);</span>
+            
+            try
+                {
+<span class="nc" id="L868">                    String pass=&quot;&quot;;</span>
+<span class="nc" id="L869">                    Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L870">                    Connection con = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/&quot;,&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L871">                    Statement stt = con.createStatement();</span>
+<span class="nc" id="L872">                    stt.execute(&quot;USE tghm&quot;);</span>
+                            
+<span class="nc" id="L874">                    String query =&quot;SELECT Password FROM foodsupplier WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L875">                    ResultSet rs =stt.executeQuery(query);</span>
+                    
+<span class="nc bnc" id="L877" title="All 2 branches missed.">                    if(!rs.isBeforeFirst()){    </span>
+<span class="nc" id="L878">                        Invaliduserwarn.setVisible(true);</span>
+                    } 
+<span class="nc bnc" id="L880" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc" id="L881">                        pass = rs.getString(&quot;Password&quot;);</span>
+<span class="nc" id="L882">                            FoodSupplierAuth newone = new FoodSupplierAuth(Username.getText(),Password.getText());</span>
+<span class="nc" id="L883">                            FoodSupplierFrame frame = new FoodSupplierFrame(newone);</span>
+<span class="nc" id="L884">                            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L885">                            frame.setVisible(true);</span>
+<span class="nc" id="L886">                            break;</span>
+                    }           
+<span class="nc" id="L888">                    stt.close();</span>
+<span class="nc" id="L889">                    con.close();</span>
+                }
+<span class="nc" id="L891">                catch (Exception e)</span>
+                {
+<span class="nc" id="L893">                    e.printStackTrace();</span>
+<span class="nc" id="L894">                }</span>
+        }
+        
+<span class="nc bnc" id="L897" title="All 2 branches missed.">        else if(AgentButton.isSelected()==true){</span>
+<span class="nc" id="L898">            contactNo.setVisible(false);</span>
+<span class="nc" id="L899">            contactNoLabel.setVisible(false);</span>
+            
+<span class="nc" id="L901">            Radiowarn.setVisible(false);</span>
+            
+            try
+                {
+<span class="nc" id="L905">                    String pass=&quot;&quot;;</span>
+<span class="nc" id="L906">                    Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L907">                    Connection con = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/&quot;,&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L908">                    Statement stt = con.createStatement();</span>
+<span class="nc" id="L909">                    stt.execute(&quot;USE tghm&quot;);</span>
+                            
+<span class="nc" id="L911">                    String query =&quot;SELECT Password FROM agent WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L912">                    ResultSet rs =stt.executeQuery(query);</span>
+                    
+<span class="nc bnc" id="L914" title="All 2 branches missed.">                    if(!rs.isBeforeFirst()){    </span>
+<span class="nc" id="L915">                        Invaliduserwarn.setVisible(true);</span>
+                    } 
+<span class="nc bnc" id="L917" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc" id="L918">                        pass = rs.getString(&quot;Password&quot;);</span>
+<span class="nc" id="L919">                        AgentAuth newone = new AgentAuth(Username.getText(),Password.getText());</span>
+<span class="nc" id="L920">                        AgentFrame frame = new AgentFrame(newone);</span>
+<span class="nc" id="L921">                        frame.setVisible(true);</span>
+<span class="nc" id="L922">                        break;</span>
+                    }           
+<span class="nc" id="L924">                    stt.close();</span>
+<span class="nc" id="L925">                    con.close();</span>
+                }
+<span class="nc" id="L927">                catch (Exception e)</span>
+                {
+<span class="nc" id="L929">                    e.printStackTrace();</span>
+<span class="nc" id="L930">                }</span>
+<span class="nc bnc" id="L931" title="All 2 branches missed.">        }else if(customerRegister.isSelected()==true){</span>
+            
+<span class="nc" id="L933">            Radiowarn.setVisible(false);</span>
+            try
+            {
+<span class="nc" id="L936">                String pass=&quot;&quot;;</span>
+<span class="nc" id="L937">                Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L938">                Connection con = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/&quot;,&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L939">                Statement stt = con.createStatement();</span>
+<span class="nc" id="L940">                stt.execute(&quot;USE tghm&quot;);</span>
+                
+                String query;
+<span class="nc" id="L943">                query=&quot;SELECT * FROM customer WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L944">                ResultSet rs = stt.executeQuery(query);</span>
+<span class="nc bnc" id="L945" title="All 2 branches missed.">                if(rs.next()){</span>
+<span class="nc" id="L946">                        JOptionPane.showMessageDialog(null,&quot;Username already exists&quot;);</span>
+<span class="nc" id="L947">                        return;</span>
+                }
+                
+<span class="nc" id="L950">                query =&quot;INSERT INTO customer (Username,Password,Contact) VALUES('&quot;+Username.getText()+&quot;','&quot;+Password.getText()+&quot;','&quot;+contactNo.getText()+&quot;')&quot;;</span>
+<span class="nc" id="L951">                stt.execute(query);</span>
+
+<span class="nc" id="L953">                Username.setText(&quot;&quot;);</span>
+<span class="nc" id="L954">                Password.setText(&quot;&quot;);</span>
+<span class="nc" id="L955">                contactNo.setText(&quot;&quot;);</span>
+
+<span class="nc" id="L957">                stt.close();</span>
+<span class="nc" id="L958">                con.close();</span>
+            }
+<span class="nc" id="L960">            catch (Exception e)</span>
+            {
+<span class="nc" id="L962">                e.printStackTrace();</span>
+<span class="nc" id="L963">            }</span>
+        }
+<span class="nc bnc" id="L965" title="All 2 branches missed.">        else if(ManagementButton.isSelected()==true){</span>
+<span class="nc" id="L966">            contactNo.setVisible(false);</span>
+<span class="nc" id="L967">            contactNoLabel.setVisible(false);</span>
+        
+<span class="nc" id="L969">            Radiowarn.setVisible(false);</span>
+            try
+                {
+<span class="nc" id="L972">                    String pass=&quot;&quot;;</span>
+<span class="nc" id="L973">                    Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L974">                    Connection con = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/&quot;,&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L975">                    Statement stt = con.createStatement();</span>
+<span class="nc" id="L976">                    stt.execute(&quot;USE tghm&quot;);</span>
+                            
+<span class="nc" id="L978">                    String query =&quot;SELECT Password FROM management WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L979">                    ResultSet rs =stt.executeQuery(query);</span>
+                    
+<span class="nc bnc" id="L981" title="All 2 branches missed.">                    if(!rs.isBeforeFirst()){    </span>
+<span class="nc" id="L982">                        Invaliduserwarn.setVisible(true);</span>
+                    } 
+<span class="nc bnc" id="L984" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc" id="L985">                        pass = rs.getString(&quot;Password&quot;);</span>
+<span class="nc" id="L986">                            ManagementAuth newone = new ManagementAuth(Username.getText(),Password.getText());</span>
+<span class="nc" id="L987">                            MainFrame frame = new MainFrame(newone);</span>
+<span class="nc" id="L988">                            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L989">                            frame.setVisible(true);</span>
+<span class="nc" id="L990">                            break;</span>
+                        
+                    }           
+<span class="nc" id="L993">                    stt.close();</span>
+<span class="nc" id="L994">                    con.close();</span>
+                }
+<span class="nc" id="L996">                catch (Exception e)</span>
+                {
+<span class="nc" id="L998">                    e.printStackTrace();</span>
+<span class="nc" id="L999">                }</span>
+         }
+<span class="nc bnc" id="L1001" title="All 2 branches missed.">        else if(CustomerButton.isSelected()==true){</span>
+<span class="nc" id="L1002">            contactNo.setVisible(false);</span>
+<span class="nc" id="L1003">            contactNoLabel.setVisible(false);</span>
+        
+<span class="nc" id="L1005">            Radiowarn.setVisible(false);</span>
+            try
+                {
+<span class="nc" id="L1008">                    String pass=&quot;&quot;;</span>
+<span class="nc" id="L1009">                    Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L1010">                    Connection con = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/&quot;,&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L1011">                    Statement stt = con.createStatement();</span>
+<span class="nc" id="L1012">                    stt.execute(&quot;USE tghm&quot;);</span>
+                            
+<span class="nc" id="L1014">                    String query =&quot;SELECT Password FROM customer WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L1015">                    ResultSet rs =stt.executeQuery(query);</span>
+                    
+<span class="nc bnc" id="L1017" title="All 2 branches missed.">                    if(!rs.isBeforeFirst()){    </span>
+<span class="nc" id="L1018">                        Invaliduserwarn.setVisible(true);</span>
+                    } 
+<span class="nc bnc" id="L1020" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc" id="L1021">                        pass = rs.getString(&quot;Password&quot;);</span>
+<span class="nc bnc" id="L1022" title="All 2 branches missed.">                        if(pass.equals(Password.getText())){</span>
+<span class="nc" id="L1023">                            int flag =0;</span>
+<span class="nc" id="L1024">                            String squery =&quot;SELECT * FROM orderdetails WHERE CustomerUserName='&quot;+Username.getText()+&quot;'&quot;;</span>
+                            
+<span class="nc" id="L1026">                            ResultSet srs =stt.executeQuery(squery);</span>
+<span class="nc bnc" id="L1027" title="All 2 branches missed.">                            while(srs.next()){</span>
+<span class="nc bnc" id="L1028" title="All 2 branches missed.">                                if(srs.getString(&quot;Status&quot;).equals(&quot;Rejected&quot;)){</span>
+<span class="nc" id="L1029">                                    customertab.setSelectedIndex(1);</span>
+<span class="nc" id="L1030">                                    customerPane.setVisible(true);</span>
+<span class="nc" id="L1031">                                    LoginPane.setVisible(false);</span>
+<span class="nc" id="L1032">                                    flag=1;</span>
+                                }
+<span class="nc bnc" id="L1034" title="All 2 branches missed.">                                else if(srs.getString(&quot;Status&quot;).equals(&quot;Accepted&quot;)){</span>
+<span class="nc" id="L1035">                                    JOptionPane.showMessageDialog(null,&quot;Order Accepted !&quot;, query, HEIGHT, null);</span>
+                                }
+                            }
+                                   
+                            
+<span class="nc bnc" id="L1040" title="All 2 branches missed.">                            if(flag==0){</span>
+<span class="nc" id="L1041">                            jSplitPane2.setDividerLocation(123);</span>
+<span class="nc" id="L1042">                            cartSplitPane.setDividerLocation(270);</span>
+<span class="nc" id="L1043">                            customerPane.setVisible(true);</span>
+<span class="nc" id="L1044">                            LoginPane.setVisible(false);</span>
+<span class="nc" id="L1045">                            customertab.setSelectedIndex(0);</span>
+<span class="nc" id="L1046">                            query =&quot;SELECT * FROM train&quot;;</span>
+<span class="nc" id="L1047">                            ArrayList&lt;String&gt; trains= new ArrayList&lt;String&gt;();</span>
+                            
+<span class="nc" id="L1049">                            rs =stt.executeQuery(query);</span>
+<span class="nc bnc" id="L1050" title="All 2 branches missed.">                            while(rs.next()){</span>
+<span class="nc" id="L1051">                                trains.add(rs.getString(&quot;Number&quot;));</span>
+                            }
+<span class="nc" id="L1053">                            trainNumber.setModel(new DefaultComboBoxModel(trains.toArray()));</span>
+<span class="nc" id="L1054">                            ArrayList&lt;String&gt; suppliers= new ArrayList&lt;String&gt;();</span>
+                            
+<span class="nc" id="L1056">                            String cquery = &quot;SELECT * FROM customer WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+                            
+<span class="nc" id="L1058">                            ResultSet crs= stt.executeQuery(cquery);</span>
+<span class="nc" id="L1059">                            crs.next();</span>
+<span class="nc" id="L1060">                            String str = crs.getString(&quot;RejectedAgents&quot;);</span>
+<span class="nc" id="L1061">                            ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;(Arrays.asList(str.split(&quot;,&quot;)));</span>
+<span class="nc bnc" id="L1062" title="All 2 branches missed.">                            for(String x:list){</span>
+<span class="nc" id="L1063">                                System.out.println(x);</span>
+<span class="nc" id="L1064">                            }</span>
+<span class="nc" id="L1065">                            query =&quot;SELECT * FROM agent ORDER BY SucessOrders DESC&quot;;</span>
+<span class="nc" id="L1066">                            rs =stt.executeQuery(query);</span>
+<span class="nc bnc" id="L1067" title="All 2 branches missed.">                            while(rs.next()){</span>
+<span class="nc bnc" id="L1068" title="All 2 branches missed.">                                if(list.contains(rs.getString(&quot;FoodSupplierUserName&quot;))){</span>
+<span class="nc" id="L1069">                                    System.out.println(&quot;ger&quot;);</span>
+                                }
+<span class="nc" id="L1071">                                else suppliers.add(rs.getString(&quot;FoodSupplierUserName&quot;));</span>
+                            }
+<span class="nc" id="L1073">                            foodSupplier.setModel(new DefaultComboBoxModel(suppliers.toArray()));</span>
+                            
+<span class="nc" id="L1075">                            makeTable();</span>
+<span class="nc" id="L1076">                        }</span>
+                            break;
+                        }
+                        else{
+<span class="nc" id="L1080">                            Invaliduserwarn.setVisible(true);</span>
+                        }
+                        
+                    }
+<span class="nc" id="L1084">                    stt.close();</span>
+<span class="nc" id="L1085">                    con.close();</span>
+                }
+<span class="nc" id="L1087">                catch (Exception e)</span>
+                {
+<span class="nc" id="L1089">                    e.printStackTrace();</span>
+<span class="nc" id="L1090">                }</span>
+        }
+        else{
+<span class="nc" id="L1093">            Radiowarn.setVisible(true);</span>
+        }
+<span class="nc" id="L1095">    }//GEN-LAST:event_LoginButtonActionPerformed</span>
+
+    private void makeTable() throws InstantiationException, IllegalAccessException, SQLException, ClassNotFoundException{
+      
+        try
+                {
+<span class="nc" id="L1101">                    String pass=&quot;&quot;;</span>
+<span class="nc" id="L1102">                    Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L1103">                    Connection con = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/&quot;,&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L1104">                    Statement stt = con.createStatement();</span>
+                    
+<span class="nc" id="L1106">                    stt.execute(&quot;USE tghm&quot;);</span>
+                    
+<span class="nc" id="L1108">                    String cquery = &quot;SELECT * FROM customer WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+                    
+<span class="nc" id="L1110">                    ResultSet crs= stt.executeQuery(cquery);</span>
+<span class="nc" id="L1111">                    crs.next();</span>
+<span class="nc" id="L1112">                    String str = crs.getString(&quot;RejectedAgents&quot;);</span>
+<span class="nc" id="L1113">                    ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;(Arrays.asList(str.split(&quot;,&quot;)));</span>
+<span class="nc bnc" id="L1114" title="All 2 branches missed.">                    for(String x:list){</span>
+<span class="nc" id="L1115">                        System.out.println(x);</span>
+<span class="nc" id="L1116">                    }</span>
+                    
+<span class="nc" id="L1118">                    String query =&quot;SELECT * FROM agent ORDER BY SucessOrders DESC,TotalOrders Desc&quot;;</span>
+<span class="nc" id="L1119">                    ResultSet rs =stt.executeQuery(query);</span>
+                    
+<span class="nc" id="L1121">                    int t =1;</span>
+<span class="nc" id="L1122">                    DefaultTableModel model = (DefaultTableModel)tableAgent.getModel();</span>
+<span class="nc" id="L1123">                    model.setRowCount(0);</span>
+<span class="nc bnc" id="L1124" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc bnc" id="L1125" title="All 2 branches missed.">                        if(list.contains(rs.getString(&quot;FoodSupplierUserName&quot;))){</span>
+<span class="nc" id="L1126">                            model.addRow(new Object[]{t,&quot;Rejected -****&quot;+rs.getString(&quot;FoodSupplierUserName&quot;)+&quot; - &quot;+rs.getString(&quot;Name&quot;)+&quot;*****&quot;,rs.getFloat(&quot;SucessOrders&quot;),rs.getInt(&quot;TotalOrders&quot;)});</span>
+                        }
+                        else{
+<span class="nc" id="L1129">                            System.out.println(&quot;Hey ing&quot;);</span>
+<span class="nc" id="L1130">                            model.addRow(new Object[]{t,rs.getString(&quot;FoodSupplierUserName&quot;)+&quot; - &quot;+rs.getString(&quot;Name&quot;),rs.getFloat(&quot;SucessOrders&quot;),rs.getInt(&quot;TotalOrders&quot;)});</span>
+                        }
+<span class="nc" id="L1132">                        t++;</span>
+                    }
+<span class="nc" id="L1134">                    tableAgent.setModel(model);</span>
+<span class="nc" id="L1135">                    stt.close();</span>
+<span class="nc" id="L1136">                    con.close();</span>
+                }
+<span class="nc" id="L1138">                catch (Exception e)</span>
+                {
+<span class="nc" id="L1140">                    e.printStackTrace();</span>
+<span class="nc" id="L1141">                }</span>
+    
+<span class="nc" id="L1143">    }</span>
+    private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
+<span class="nc bnc" id="L1145" title="All 2 branches missed.">        if(menuCart.getSelectedIndex()==-1){</span>
+<span class="nc" id="L1146">            return;</span>
+        }
+<span class="nc" id="L1148">        cartitems.add(menuCart.getSelectedValue()+&quot; - &quot;+(countCart.getSelectedIndex()+1));</span>
+<span class="nc" id="L1149">        int index = menuCart.getSelectedIndex();</span>
+<span class="nc" id="L1150">        DefaultListModel model = (DefaultListModel) menuCart.getModel();</span>
+<span class="nc" id="L1151">        int selectedIndex = menuCart.getSelectedIndex();</span>
+<span class="nc bnc" id="L1152" title="All 2 branches missed.">        if (selectedIndex != -1) {</span>
+<span class="nc" id="L1153">            model.remove(selectedIndex);</span>
+        }
+<span class="nc" id="L1155">        menuCart.setModel(model);</span>
+<span class="nc" id="L1156">        foodSupplier.setEnabled(false);</span>
+<span class="nc" id="L1157">        DefaultListModel newone =new DefaultListModel();</span>
+<span class="nc bnc" id="L1158" title="All 2 branches missed.">        for(String x:cartitems){</span>
+<span class="nc" id="L1159">            newone.addElement(x);</span>
+<span class="nc" id="L1160">        }</span>
+<span class="nc" id="L1161">        cart.setModel(newone);</span>
+<span class="nc" id="L1162">    }//GEN-LAST:event_moveButtonActionPerformed</span>
+
+    private void hourComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hourComboActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1166">    }//GEN-LAST:event_hourComboActionPerformed</span>
+
+    private void minuteComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minuteComboActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1170">    }//GEN-LAST:event_minuteComboActionPerformed</span>
+
+    private void countCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countCartActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1174">    }//GEN-LAST:event_countCartActionPerformed</span>
+
+    private void foodSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodSupplierActionPerformed
+        try {
+<span class="nc" id="L1178">            String pass=&quot;&quot;;</span>
+<span class="nc" id="L1179">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L1180">            Connection con = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/&quot;,&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L1181">            Statement stt = con.createStatement();</span>
+            
+<span class="nc" id="L1183">            stt.execute(&quot;USE tghm&quot;);</span>
+            
+            
+<span class="nc" id="L1186">            String query =&quot;SELECT * FROM foodsupplier&quot;;</span>
+<span class="nc" id="L1187">            ResultSet rs =stt.executeQuery(query);</span>
+<span class="nc bnc" id="L1188" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L1189">                System.out.println(rs.getString(&quot;Username&quot;)+foodSupplier.getSelectedItem());</span>
+<span class="nc bnc" id="L1190" title="All 2 branches missed.">                if(foodSupplier.getSelectedItem().toString().equals(rs.getString(&quot;Username&quot;))){</span>
+<span class="nc" id="L1191">                    System.out.println(rs.getString(&quot;Username&quot;));</span>
+<span class="nc" id="L1192">                   int[] numbers = Arrays.asList(rs.getString(&quot;Menu&quot;).split(&quot;,&quot;))</span>
+<span class="nc" id="L1193">                      .stream()</span>
+<span class="nc" id="L1194">                      .map(String::trim)</span>
+<span class="nc" id="L1195">                      .mapToInt(Integer::parseInt).toArray();</span>
+<span class="nc" id="L1196">                    ArrayList&lt;Integer&gt; snonumbers = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L1197" title="All 2 branches missed.">                    for(int i=0;i&lt;numbers.length;i++){</span>
+<span class="nc" id="L1198">                        snonumbers.add(numbers[i]);</span>
+<span class="nc" id="L1199">                        System.out.println(numbers[i]);</span>
+                    }
+                    
+<span class="nc" id="L1202">                    ArrayList&lt;String&gt; item= new ArrayList&lt;String&gt;();</span>
+                            
+<span class="nc" id="L1204">                    query =&quot;SELECT * FROM fooditem&quot;;</span>
+<span class="nc" id="L1205">                    rs =stt.executeQuery(query);</span>
+<span class="nc bnc" id="L1206" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc bnc" id="L1207" title="All 2 branches missed.">                        if(snonumbers.contains(Integer.parseInt(rs.getString(&quot;Sno&quot;)))){</span>
+<span class="nc" id="L1208">                            item.add(rs.getString(&quot;Name&quot;));</span>
+                        }
+                    }
+<span class="nc" id="L1211">                    DefaultListModel newone =new DefaultListModel();</span>
+<span class="nc bnc" id="L1212" title="All 2 branches missed.">                    for(String x:item){</span>
+<span class="nc" id="L1213">                        newone.addElement(x);</span>
+<span class="nc" id="L1214">                    }</span>
+<span class="nc" id="L1215">                    menuCart.setModel(newone);</span>
+                            
+<span class="nc" id="L1217">                }</span>
+            }
+<span class="nc" id="L1219">        } catch (SQLException ex) {</span>
+<span class="nc" id="L1220">            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L1221">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L1222">            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L1223">        } catch (InstantiationException ex) {</span>
+<span class="nc" id="L1224">            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L1225">        } catch (IllegalAccessException ex) {</span>
+<span class="nc" id="L1226">            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L1227">        }</span>
+<span class="nc" id="L1228">    }//GEN-LAST:event_foodSupplierActionPerformed</span>
+
+    private void foodSupplierItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_foodSupplierItemStateChanged
+        
+<span class="nc" id="L1232">    }//GEN-LAST:event_foodSupplierItemStateChanged</span>
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+<span class="nc bnc" id="L1235" title="All 2 branches missed.">        if(cart.getModel().getSize()==0){</span>
+<span class="nc" id="L1236">            jLabel16.setVisible(true);</span>
+<span class="nc" id="L1237">            jLabel17.setVisible(true);</span>
+<span class="nc" id="L1238">            return;</span>
+        }
+<span class="nc" id="L1240">        jLabel16.setVisible(false);</span>
+<span class="nc" id="L1241">        jLabel17.setVisible(false);</span>
+<span class="nc" id="L1242">        moveButton.setEnabled(false);</span>
+<span class="nc" id="L1243">    }//GEN-LAST:event_jButton2ActionPerformed</span>
+
+    private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
+<span class="nc" id="L1246">        customerPane.setVisible(false);</span>
+<span class="nc" id="L1247">        LoginPane.setVisible(true);</span>
+<span class="nc" id="L1248">    }//GEN-LAST:event_logOutActionPerformed</span>
+
+    private void placeOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderButtonActionPerformed
+<span class="nc" id="L1251">        String url = &quot;jdbc:mysql://localhost:3306/&quot;;</span>
+<span class="nc" id="L1252">        String user = &quot;root&quot;;</span>
+<span class="nc" id="L1253">        String password = &quot;&quot;;</span>
+        try
+        {
+<span class="nc bnc" id="L1256" title="All 2 branches missed.">            if(moveButton.isEnabled() ==true){</span>
+<span class="nc" id="L1257">                jLabel11.setVisible(true);</span>
+<span class="nc" id="L1258">                return;</span>
+            }
+<span class="nc" id="L1260">            jLabel11.setVisible(false);</span>
+<span class="nc" id="L1261">            String orderdetails =&quot;&quot;;</span>
+<span class="nc" id="L1262">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L1263">            Connection con = DriverManager.getConnection(url, user, password);</span>
+<span class="nc" id="L1264">            Statement stt = con.createStatement();</span>
+            
+<span class="nc" id="L1266">            orderdetails =  &quot;INSERT INTO orderdetails(TrainNumber,DeliveryStation,TimeOfDelivery,FoodItems,Status,FoodSupplier,CustomerUserName) VALUES('&quot;+trainNumber.getSelectedItem()+&quot;','&quot;+721302+&quot;','&quot;+hourCombo.getSelectedIndex()+</span>
+<span class="nc" id="L1267">                    &quot;:&quot;+minuteCombo.getSelectedIndex()+&quot;,&quot;+new SimpleDateFormat(&quot;MM/dd/yyyy&quot;).format(Calendar.getInstance().getTime())+&quot;','&quot;;</span>
+            
+<span class="nc" id="L1269">            ListModel iterate = (ListModel) cart.getModel();</span>
+            
+<span class="nc bnc" id="L1271" title="All 2 branches missed.">            for(int i=0;i&lt;iterate.getSize();i++){</span>
+<span class="nc" id="L1272">                orderdetails+=iterate.getElementAt(i)+&quot; &quot;;</span>
+            }
+            
+<span class="nc" id="L1275">            orderdetails+=&quot;','UnAccepted','&quot;;</span>
+<span class="nc" id="L1276">            orderdetails+=(foodSupplier.getSelectedItem()+&quot;','&quot;);</span>
+<span class="nc" id="L1277">            orderdetails+=(Username.getText()+&quot;')&quot;);</span>
+<span class="nc" id="L1278">            stt.execute(&quot;USE tghm&quot;);</span>
+<span class="nc" id="L1279">            startTimer(Username.getText());</span>
+<span class="nc" id="L1280">            placeOrderButton.setEnabled(false);</span>
+<span class="nc" id="L1281">            stt.execute(orderdetails);</span>
+<span class="nc" id="L1282">            stt.close();</span>
+<span class="nc" id="L1283">            con.close();</span>
+        }
+<span class="nc" id="L1285">        catch (Exception e)</span>
+        {
+<span class="nc" id="L1287">            e.printStackTrace();</span>
+<span class="nc" id="L1288">        }</span>
+<span class="nc" id="L1289">    }//GEN-LAST:event_placeOrderButtonActionPerformed</span>
+public static void startTimer(String cus){
+<span class="nc" id="L1291">        String url = &quot;jdbc:mysql://localhost:3306/&quot;;</span>
+<span class="nc" id="L1292">        String user = &quot;root&quot;;</span>
+<span class="nc" id="L1293">        String password = &quot;&quot;;</span>
+        
+<span class="nc" id="L1295">        new java.util.Timer().schedule( </span>
+<span class="nc" id="L1296">        new java.util.TimerTask() {</span>
+            @Override
+            public void run() {
+                try
+                {
+<span class="nc" id="L1301">                    String orderdetails =&quot;&quot;;</span>
+<span class="nc" id="L1302">                    String status=&quot;&quot;;</span>
+<span class="nc" id="L1303">                    Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L1304">                    Connection con = DriverManager.getConnection(url, user, password);</span>
+<span class="nc" id="L1305">                    Statement stt = con.createStatement();</span>
+                    
+<span class="nc" id="L1307">                    stt.execute(&quot;USE tghm&quot;);</span>
+                    
+<span class="nc" id="L1309">                    String query =&quot;SELECT Status FROM orderdetails WHERE CustomerUserName='&quot;+cus+&quot;'&quot;;</span>
+                    
+<span class="nc" id="L1311">                    ResultSet rs =stt.executeQuery(query);</span>
+<span class="nc bnc" id="L1312" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc" id="L1313">                        status = rs.getString(&quot;Status&quot;);</span>
+<span class="nc bnc" id="L1314" title="All 2 branches missed.">                        if(status.equals(&quot;Accepted&quot;)){</span>
+                        }
+<span class="nc bnc" id="L1316" title="All 2 branches missed.">                        else if(status.equals(&quot;UnAccepted&quot;)){</span>
+<span class="nc" id="L1317">                            stt.execute(&quot;UPDATE orderdetails SET Status='Rejected' WHERE CustomerUserName='&quot;+cus+&quot;'&quot;);</span>
+                        }
+                        break;
+                    }
+<span class="nc" id="L1321">                    stt.close();</span>
+<span class="nc" id="L1322">                    con.close();</span>
+                }
+<span class="nc" id="L1324">                catch (Exception e)</span>
+                {
+<span class="nc" id="L1326">                    e.printStackTrace();</span>
+<span class="nc" id="L1327">                }</span>
+<span class="nc" id="L1328">            }</span>
+        }, 
+        6000 
+        );
+<span class="nc" id="L1332">    }</span>
+    private void CancelRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelRBActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1335">    }//GEN-LAST:event_CancelRBActionPerformed</span>
+
+    private void modifyRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyRBActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1339">    }//GEN-LAST:event_modifyRBActionPerformed</span>
+
+    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
+<span class="nc" id="L1342">        String url = &quot;jdbc:mysql://localhost:3306/&quot;;</span>
+<span class="nc" id="L1343">        String user = &quot;root&quot;;</span>
+<span class="nc" id="L1344">        String password = &quot;&quot;;</span>
+        
+        try
+        {
+<span class="nc" id="L1348">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L1349">            Connection con = DriverManager.getConnection(url, user, password);</span>
+<span class="nc" id="L1350">            Statement stt = con.createStatement();</span>
+            
+<span class="nc" id="L1352">            stt.execute(&quot;USE tghm&quot;);</span>
+<span class="nc bnc" id="L1353" title="All 2 branches missed.">                if(modifyRB.isSelected()){</span>
+<span class="nc" id="L1354">                    String tquery = &quot;SELECT * FROM orderdetails WHERE CustomerUserName='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L1355">                    ResultSet mrs =stt.executeQuery(tquery);</span>
+<span class="nc" id="L1356">                    String curreg=&quot;&quot;;</span>
+<span class="nc" id="L1357">                    mrs.next();</span>
+<span class="nc" id="L1358">                    curreg  = mrs.getString(&quot;FoodSupplier&quot;);</span>
+
+                    
+<span class="nc" id="L1361">                    String nquery = &quot;SELECT * FROM customer WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L1362">                    ResultSet nrs =stt.executeQuery(nquery);</span>
+<span class="nc" id="L1363">                    nrs.next();</span>
+<span class="nc" id="L1364">                    String rej = nrs.getString(&quot;RejectedAgents&quot;);</span>
+<span class="nc bnc" id="L1365" title="All 2 branches missed.">                    if(rej != null)</span>
+                    {
+<span class="nc" id="L1367">                        rej= rej + &quot;,&quot;+curreg+&quot;,&quot;;</span>
+                    }
+<span class="nc" id="L1369">                    else rej= curreg+&quot;,&quot;;</span>
+<span class="nc" id="L1370">                    nquery=&quot;UPDATE customer SET RejectedAgents='&quot;+rej+&quot;' WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L1371">                    stt.execute(nquery);</span>
+<span class="nc" id="L1372">                    nquery= &quot;DELETE FROM orderdetails WHERE CustomerUserName='&quot;+Username.getText()+&quot;' AND Status='Rejected'&quot;;</span>
+<span class="nc" id="L1373">                    stt.execute(nquery);</span>
+
+<span class="nc" id="L1375">                    customerPane.setVisible(true);</span>
+<span class="nc" id="L1376">                    LoginPane.setVisible(false);</span>
+<span class="nc" id="L1377">                    customertab.setSelectedIndex(0);</span>
+<span class="nc" id="L1378">                    placeOrderButton.setEnabled(true);</span>
+<span class="nc" id="L1379">                    foodSupplier.setEnabled(true);</span>
+<span class="nc" id="L1380">                    moveButton.setEnabled(true);</span>
+
+<span class="nc" id="L1382">                    jSplitPane2.setDividerLocation(123);</span>
+<span class="nc" id="L1383">                    cartSplitPane.setDividerLocation(270);</span>
+<span class="nc" id="L1384">            }</span>
+<span class="nc bnc" id="L1385" title="All 2 branches missed.">                else if(CancelRB.isSelected() ==true){</span>
+<span class="nc" id="L1386">                    String tquery = &quot;SELECT * FROM orderdetails WHERE CustomerUserName='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L1387">                    ResultSet mrs =stt.executeQuery(tquery);</span>
+<span class="nc" id="L1388">                    String curreg=&quot;&quot;;</span>
+<span class="nc" id="L1389">                    mrs.next();</span>
+<span class="nc" id="L1390">                    curreg  = mrs.getString(&quot;FoodSupplier&quot;);</span>
+                    
+<span class="nc" id="L1392">                    String nquery = &quot;SELECT * FROM customer WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L1393">                    ResultSet nrs =stt.executeQuery(nquery);</span>
+<span class="nc" id="L1394">                    nrs.next();</span>
+<span class="nc" id="L1395">                    String rej = nrs.getString(&quot;RejectedAgents&quot;);</span>
+<span class="nc bnc" id="L1396" title="All 2 branches missed.">                    if(rej != null)</span>
+                    {
+<span class="nc" id="L1398">                        rej= rej + &quot;,&quot;+curreg;</span>
+                    }
+<span class="nc" id="L1400">                    else rej= curreg;</span>
+<span class="nc" id="L1401">                    nquery=&quot;UPDATE customer SET RejectedAgents='&quot;+rej+&quot;' WHERE Username='&quot;+Username.getText()+&quot;'&quot;;</span>
+<span class="nc" id="L1402">                    stt.execute(nquery);</span>
+<span class="nc" id="L1403">                    nquery= &quot;DELETE FROM orderdetails WHERE CustomerUserName='&quot;+Username.getText()+&quot;' AND Status='Rejected'&quot;;</span>
+<span class="nc" id="L1404">                    stt.execute(nquery);</span>
+
+<span class="nc" id="L1406">                    customerPane.setVisible(false);</span>
+<span class="nc" id="L1407">                    modifyPane.setVisible(false);</span>
+<span class="nc" id="L1408">                    LoginPane.setVisible(true);</span>
+<span class="nc" id="L1409">                    placeOrderButton.setEnabled(true);</span>
+<span class="nc" id="L1410">                    foodSupplier.setEnabled(true);</span>
+<span class="nc" id="L1411">                    moveButton.setEnabled(true);</span>
+<span class="nc" id="L1412">                    jSplitPane2.setDividerLocation(123);</span>
+<span class="nc" id="L1413">                    cartSplitPane.setDividerLocation(270);</span>
+                
+                }
+
+<span class="nc" id="L1417">            stt.close();</span>
+<span class="nc" id="L1418">            con.close();</span>
+<span class="nc" id="L1419">            }catch (Exception e)</span>
+            {
+<span class="nc" id="L1421">                e.printStackTrace();</span>
+<span class="nc" id="L1422">            }    </span>
+
+<span class="nc" id="L1424">    }//GEN-LAST:event_ProceedActionPerformed</span>
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+<span class="nc" id="L1427">        String url = &quot;jdbc:mysql://localhost:3306/&quot;;</span>
+<span class="nc" id="L1428">        String user = &quot;root&quot;;</span>
+<span class="nc" id="L1429">        String password = &quot;&quot;;</span>
+       
+        try
+        {
+<span class="nc" id="L1433">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L1434">            Connection con = DriverManager.getConnection(url, user, password);</span>
+<span class="nc" id="L1435">            Statement stt = con.createStatement();</span>
+<span class="nc" id="L1436">            stt.execute(&quot;USE tghm&quot;);</span>
+<span class="nc" id="L1437">            foodSupplier.setSelectedIndex(0);</span>
+<span class="nc" id="L1438">            String query =&quot;SELECT * FROM foodsupplier&quot;;</span>
+<span class="nc" id="L1439">            ResultSet rs =stt.executeQuery(query);</span>
+<span class="nc bnc" id="L1440" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L1441">                System.out.println(rs.getString(&quot;Username&quot;)+foodSupplier.getSelectedItem());</span>
+<span class="nc bnc" id="L1442" title="All 2 branches missed.">                if(foodSupplier.getSelectedItem().toString().equals(rs.getString(&quot;Username&quot;))){</span>
+<span class="nc" id="L1443">                    System.out.println(rs.getString(&quot;Username&quot;));</span>
+<span class="nc" id="L1444">                    int[] numbers = Arrays.asList(rs.getString(&quot;Menu&quot;).split(&quot;,&quot;))</span>
+<span class="nc" id="L1445">                      .stream()</span>
+<span class="nc" id="L1446">                      .map(String::trim)</span>
+<span class="nc" id="L1447">                      .mapToInt(Integer::parseInt).toArray();</span>
+<span class="nc" id="L1448">                    ArrayList&lt;Integer&gt; snonumbers = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L1449" title="All 2 branches missed.">                    for(int i=0;i&lt;numbers.length-1;i++){</span>
+<span class="nc" id="L1450">                        menuCart.setSelectedIndex(i);</span>
+<span class="nc" id="L1451">                        System.out.println(menuCart.getSelectedValue()+i);</span>
+<span class="nc" id="L1452">                        cartitems.add(menuCart.getSelectedValue()+&quot; - &quot;+(countCart.getSelectedIndex()+1));</span>
+<span class="nc" id="L1453">                        DefaultListModel model = (DefaultListModel) menuCart.getModel();</span>
+<span class="nc" id="L1454">                        int selectedIndex = menuCart.getSelectedIndex();</span>
+<span class="nc bnc" id="L1455" title="All 2 branches missed.">                        if (selectedIndex != -1) {</span>
+<span class="nc" id="L1456">                            model.remove(selectedIndex);</span>
+                        }
+<span class="nc" id="L1458">                        menuCart.setModel(model);</span>
+<span class="nc" id="L1459">                        foodSupplier.setEnabled(false);</span>
+<span class="nc" id="L1460">                        DefaultListModel newone =new DefaultListModel();</span>
+<span class="nc bnc" id="L1461" title="All 2 branches missed.">                        for(String x:cartitems){</span>
+<span class="nc" id="L1462">                            newone.addElement(x);</span>
+<span class="nc" id="L1463">                        }</span>
+<span class="nc" id="L1464">                        cart.setModel(newone);</span>
+                    }
+                
+<span class="nc" id="L1467">                }</span>
+            }
+            
+<span class="nc" id="L1470">            stt.close();</span>
+<span class="nc" id="L1471">            con.close();</span>
+            }
+<span class="nc" id="L1473">            catch (Exception e)</span>
+            {
+<span class="nc" id="L1475">                e.printStackTrace();</span>
+<span class="nc" id="L1476">        }    </span>
+
+        
+<span class="nc" id="L1479">    }//GEN-LAST:event_jButton1ActionPerformed</span>
+
+    private void FoodSupplierButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FoodSupplierButtonActionPerformed
+<span class="nc" id="L1482">        contactNo.setVisible(false);</span>
+<span class="nc" id="L1483">        contactNoLabel.setVisible(false);</span>
+        
+<span class="nc" id="L1485">    }//GEN-LAST:event_FoodSupplierButtonActionPerformed</span>
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+<span class="nc" id="L1488">        FoodSupplierRegisterPane newframe = new FoodSupplierRegisterPane();</span>
+<span class="nc" id="L1489">        newframe.setVisible(true);</span>
+        
+<span class="nc" id="L1491">    }//GEN-LAST:event_jButton3ActionPerformed</span>
+
+    private void contactNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactNoActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1495">    }//GEN-LAST:event_contactNoActionPerformed</span>
+
+    private void customerRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerRegisterActionPerformed
+<span class="nc" id="L1498">        contactNo.setVisible(true);</span>
+<span class="nc" id="L1499">        contactNoLabel.setVisible(true);</span>
+<span class="nc" id="L1500">    }//GEN-LAST:event_customerRegisterActionPerformed</span>
+
+    private void trainNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainNumberActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1504">    }//GEN-LAST:event_trainNumberActionPerformed</span>
+
+    private void AgentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgentButtonActionPerformed
+<span class="nc" id="L1507">        contactNo.setVisible(false);</span>
+<span class="nc" id="L1508">        contactNoLabel.setVisible(false);</span>
+        
+<span class="nc" id="L1510">    }//GEN-LAST:event_AgentButtonActionPerformed</span>
+
+    private void CustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerButtonActionPerformed
+<span class="nc" id="L1513">        contactNo.setVisible(false);</span>
+<span class="nc" id="L1514">        contactNoLabel.setVisible(false);    </span>
+<span class="nc" id="L1515">    }//GEN-LAST:event_CustomerButtonActionPerformed</span>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton AgentButton;
+    private javax.swing.JRadioButton CancelRB;
+    private javax.swing.JRadioButton CustomerButton;
+    private javax.swing.JRadioButton FoodSupplierButton;
+    private javax.swing.JLabel Invaliduserwarn;
+    private javax.swing.JButton LoginButton;
+    private javax.swing.JPanel LoginPane;
+    private javax.swing.JRadioButton ManagementButton;
+    private javax.swing.JTextField Password;
+    private javax.swing.JButton Proceed;
+    private javax.swing.JLabel Radiowarn;
+    private javax.swing.JTextField Username;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JList&lt;String&gt; cart;
+    private javax.swing.JPanel cartPanel;
+    private javax.swing.JSplitPane cartSplitPane;
+    private javax.swing.JTextField contactNo;
+    private javax.swing.JLabel contactNoLabel;
+    private javax.swing.JComboBox&lt;String&gt; countCart;
+    private javax.swing.JPanel customerPane;
+    private javax.swing.JRadioButton customerRegister;
+    private javax.swing.JTabbedPane customertab;
+    private javax.swing.JPanel dummy;
+    private javax.swing.JLabel dummylabe;
+    private javax.swing.JComboBox&lt;String&gt; foodSupplier;
+    private javax.swing.JComboBox&lt;String&gt; hourCombo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton logOut;
+    private javax.swing.JList&lt;String&gt; menuCart;
+    private javax.swing.JComboBox&lt;String&gt; minuteCombo;
+    private javax.swing.JPanel modifyPane;
+    private javax.swing.JRadioButton modifyRB;
+    private javax.swing.JButton moveButton;
+    private javax.swing.JPanel placeOrder;
+    private javax.swing.JButton placeOrderButton;
+    private javax.swing.JTable tableAgent;
+    private javax.swing.JComboBox&lt;String&gt; trainNumber;
+    // End of variables declaration//GEN-END:variables
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

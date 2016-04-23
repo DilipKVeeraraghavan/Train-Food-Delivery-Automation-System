@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MainTest.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">MainTest.java</span></div><h1>MainTest.java</h1><pre class="source lang-java linenums">package TGHM;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.AuthenticationException;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author THARUN
+ */
+<span class="nc" id="L20">public class MainTest </span>
+{
+    public static void nothing(String[] args)
+    {
+        
+<span class="nc" id="L25">        RailwayStation s1 = new RailwayStation(&quot;Mumbai&quot;,&quot;1&quot;),s2 = new RailwayStation(&quot;Chennai&quot;,&quot;2&quot;),s3 = new RailwayStation(&quot;Mumbai&quot;,&quot;2&quot;),s4 = new RailwayStation(&quot;Dehradun&quot;,&quot;3&quot;);</span>
+<span class="nc" id="L26">        FoodItem i1 = new FoodItem(&quot;Idly&quot;,25),i2 = new FoodItem(&quot;Dosa&quot;,20),i3 = new FoodItem(&quot;Vada&quot;,30);</span>
+<span class="nc" id="L27">        Cert cert = new Cert(&quot;red&quot;);</span>
+        
+//        /*test 1*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i2);
+//            stations.add(s3);
+//            Management.sendRegistrationRequest(&quot;user&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,menu,stations,&quot;FoodChain&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);
+//        
+//        /*test 2*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i1);
+//            stations.add(s1);
+//            Management.sendRegistrationRequest(&quot;user&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,menu,stations,&quot;FoodChain&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+//        /*test 3*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i1);
+//            menu.add(i2);
+//            stations.add(s2);
+//            stations.add(s4);
+//            Management.sendRegistrationRequest(&quot;user&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,menu,stations,&quot;FoodChain&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+//        /*test 4*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i1);
+//            menu.add(i2);
+//            stations.add(s2);
+//            Management.sendRegistrationRequest(&quot;user&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,menu,stations,&quot;FoodChain&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+
+        /*test 5*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i2);
+//            menu.add(i3);
+//            stations.add(s2);
+//            stations.add(s1);
+//            Management.sendRegistrationRequest(&quot;usernameeight&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,&quot;FoodChain&quot;,&quot;9192939495&quot;,&quot;Agent&quot;,&quot;Agents cell&quot;,&quot;Agentuserseven&quot;,&quot;AgentPassseven&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+//        /*test 6*/
+//        try 
+//        {
+//            ManagementAuth ma = new ManagementAuth(&quot;root&quot;,&quot;awesome&quot;);
+//            Management.rejectRegistration(ma,&quot;usernamefour&quot;);
+//            
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (AuthenticationException ex) 
+//        {
+//            System.out.println(ex.getMessage());    
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+          /*test 7*/
+//        try 
+//        {
+//            ManagementAuth ma = new ManagementAuth(&quot;root&quot;,&quot;awesome&quot;);
+//            Management.rejectRegistration(ma,&quot;usernamefour&quot;);
+//            
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (AuthenticationException ex) 
+//        {
+//            System.out.println(ex.getMessage());    
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    
+        /*test 7*/
+        try 
+        {
+<span class="nc" id="L176">            ManagementAuth ma = new ManagementAuth(&quot;root&quot;,&quot;awesome&quot;);</span>
+<span class="nc" id="L177">            ArrayList&lt;FoodSupplier&gt; fs = Management.getRegistrants(ma);</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">            for(int i=0;i&lt;fs.size();i++)</span>
+<span class="nc" id="L179">            System.out.println(fs.get(i).getName()+&quot;\n&quot;);</span>
+        } 
+<span class="nc" id="L181">        catch (IllegalArgumentException ex) </span>
+        {
+<span class="nc" id="L183">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L184">            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);</span>
+        } 
+<span class="nc" id="L186">        catch (UnableToConnectException ex) </span>
+        {
+<span class="nc" id="L188">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L189">            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);</span>
+        } 
+<span class="nc" id="L191">        catch (AuthenticationException ex) </span>
+        {
+<span class="nc" id="L193">            System.out.println(ex.getMessage());    </span>
+<span class="nc" id="L194">            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L195">        }</span>
+          
+<span class="nc" id="L197">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SystemServer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">SystemServer.java</span></div><h1>SystemServer.java</h1><pre class="source lang-java linenums">
+package TGHM;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.AuthenticationException;
+
+<span class="nc" id="L14">public class SystemServer {</span>
+    private static Scanner input,get;
+    private static int choices;
+    private static FoodItem food;
+    private static FoodSupplier provider;
+    private static Customer neu;
+    private static Time timeofdelivery;
+    private static Train t;
+    private static RailwayStation stat;
+<span class="nc" id="L23">    private static ArrayList&lt;FoodItem&gt; foodlist =new ArrayList&lt;FoodItem&gt;();</span>
+<span class="nc" id="L24">    private static ArrayList&lt;Integer&gt; foodquant =new ArrayList&lt;Integer&gt;();</span>
+    
+    public static void mains(String[] args) throws Exception{
+<span class="nc" id="L27">        System.out.println(&quot;Please enter your choice :&quot;</span>
+                + &quot;\n1. Register&quot;
+                + &quot;\n2. Place Order : dummy customer&quot;  
+                + &quot;\n3. Modify Order&quot;
+                + &quot;\n4. Cancel Order&quot;
+                );
+        
+<span class="nc" id="L34">        input = new Scanner(System.in);</span>
+    
+<span class="nc" id="L36">        neu = new Customer();</span>
+<span class="nc" id="L37">        food =new FoodItem(&quot;Rice&quot;);</span>
+<span class="nc" id="L38">        foodlist.add(food);</span>
+<span class="nc" id="L39">        foodquant.add(5);</span>
+<span class="nc" id="L40">        food =new FoodItem();</span>
+<span class="nc" id="L41">        foodlist.add(food);</span>
+<span class="nc" id="L42">        foodquant.add(3);</span>
+<span class="nc" id="L43">        food =new FoodItem(&quot;Dal&quot;);</span>
+<span class="nc" id="L44">        foodlist.add(food);</span>
+<span class="nc" id="L45">        foodquant.add(2);</span>
+<span class="nc" id="L46">        food =new FoodItem(&quot;Parotta&quot;);</span>
+<span class="nc" id="L47">        foodlist.add(food);</span>
+<span class="nc" id="L48">        foodquant.add(8);</span>
+        
+<span class="nc" id="L50">        stat = new RailwayStation();</span>
+<span class="nc" id="L51">        t =new Train();</span>
+        
+<span class="nc" id="L53">        provider = new FoodSupplier();</span>
+<span class="nc" id="L54">        timeofdelivery = new Time();</span>
+        
+<span class="nc" id="L56">        choices = input.nextInt();</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">        switch(choices){</span>
+<span class="nc" id="L58">            case 1: RegisterCustomer();</span>
+<span class="nc" id="L59">                    break;</span>
+<span class="nc" id="L60">            case 2: Management.PlaceOrder(neu,foodlist,foodquant,provider,timeofdelivery,t,stat);</span>
+<span class="nc" id="L61">                    break;</span>
+<span class="nc" id="L62">            case 3: Management.modifyOrder(12,neu,foodlist,foodquant,provider,timeofdelivery,t,stat);</span>
+                    break;
+        }
+        
+<span class="nc" id="L66">        RailwayStation s1 = new RailwayStation(&quot;Mumbai&quot;,&quot;1&quot;),s2 = new RailwayStation(&quot;Chennai&quot;,&quot;2&quot;),s3 = new RailwayStation(&quot;Mumbai&quot;,&quot;2&quot;),s4 = new RailwayStation(&quot;Dehradun&quot;,&quot;3&quot;);</span>
+<span class="nc" id="L67">        FoodItem i1 = new FoodItem(&quot;Idly&quot;,25),i2 = new FoodItem(&quot;Dosa&quot;,20),i3 = new FoodItem(&quot;Vada&quot;,30);</span>
+<span class="nc" id="L68">        Cert cert = new Cert(&quot;red&quot;);</span>
+        
+        
+        //        /*test 1*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i2);
+//            stations.add(s3);
+//            Management.sendRegistrationRequest(&quot;user&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,menu,stations,&quot;FoodChain&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);
+//        
+//        /*test 2*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i1);
+//            stations.add(s1);
+//            Management.sendRegistrationRequest(&quot;user&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,menu,stations,&quot;FoodChain&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+//        /*test 3*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i1);
+//            menu.add(i2);
+//            stations.add(s2);
+//            stations.add(s4);
+//            Management.sendRegistrationRequest(&quot;user&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,menu,stations,&quot;FoodChain&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+//        /*test 4*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i1);
+//            menu.add(i2);
+//            stations.add(s2);
+//            Management.sendRegistrationRequest(&quot;user&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,menu,stations,&quot;FoodChain&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+
+        /*test 5*/
+//        try 
+//        {
+//            ArrayList&lt;RailwayStation&gt; stations = new ArrayList&lt;RailwayStation&gt;();
+//            ArrayList&lt;FoodItem&gt;       menu     = new ArrayList&lt;FoodItem&gt;();
+//            menu.add(i2);
+//            menu.add(i3);
+//            stations.add(s2);
+//            stations.add(s1);
+//            Management.sendRegistrationRequest(&quot;usernameeight&quot;,&quot;pass&quot;,&quot;McD&quot;,cert,&quot;FoodChain&quot;,&quot;9192939495&quot;,&quot;Agent&quot;,&quot;Agents cell&quot;,&quot;Agentuserseven&quot;,&quot;AgentPassseven&quot;);
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+//        /*test 6*/
+//        try 
+//        {
+//            ManagementAuth ma = new ManagementAuth(&quot;root&quot;,&quot;awesome&quot;);
+//            Management.rejectRegistration(ma,&quot;usernamefour&quot;);
+//            
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (AuthenticationException ex) 
+//        {
+//            System.out.println(ex.getMessage());    
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+          /*test 7*/
+//        try 
+//        {
+//            ManagementAuth ma = new ManagementAuth(&quot;root&quot;,&quot;awesome&quot;);
+//            Management.rejectRegistration(ma,&quot;usernamefour&quot;);
+//            
+//        } 
+//        catch (IllegalArgumentException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (UnableToConnectException ex) 
+//        {
+//            System.out.println(ex.getMessage());
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+//        catch (AuthenticationException ex) 
+//        {
+//            System.out.println(ex.getMessage());    
+//            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+            
+ /*test 7*/
+        try 
+        {
+<span class="nc" id="L218">            ManagementAuth ma = new ManagementAuth(&quot;root&quot;,&quot;awesome&quot;);</span>
+<span class="nc" id="L219">            ArrayList&lt;FoodSupplier&gt; fs = Management.getRegistrants(ma);</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">            for(int i=0;i&lt;fs.size();i++)</span>
+<span class="nc" id="L221">            System.out.println(fs.get(i).getName()+&quot;\n&quot;);</span>
+        } 
+<span class="nc" id="L223">        catch (IllegalArgumentException ex) </span>
+        {
+<span class="nc" id="L225">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L226">            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);</span>
+        } 
+<span class="nc" id="L228">        catch (UnableToConnectException ex) </span>
+        {
+<span class="nc" id="L230">            System.out.println(ex.getMessage());</span>
+<span class="nc" id="L231">            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);</span>
+        } 
+<span class="nc" id="L233">        catch (AuthenticationException ex) </span>
+        {
+<span class="nc" id="L235">            System.out.println(ex.getMessage());    </span>
+<span class="nc" id="L236">            Logger.getLogger(MainTest.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L237">        }</span>
+<span class="nc" id="L238">    }</span>
+
+    
+    
+    private static void RegisterCustomer() throws Exception{
+<span class="nc" id="L243">        String url = &quot;jdbc:mysql://localhost:3306/&quot;;</span>
+<span class="nc" id="L244">        String user = &quot;root&quot;;</span>
+<span class="nc" id="L245">        String password = &quot;&quot;;</span>
+        try
+        {
+<span class="nc" id="L248">        get = new Scanner(System.in);</span>
+<span class="nc" id="L249">        Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance();</span>
+<span class="nc" id="L250">        Connection con = DriverManager.getConnection(url, user, password);</span>
+<span class="nc" id="L251">        Statement stt = con.createStatement();  </span>
+<span class="nc" id="L252">        stt.execute(&quot;USE tghm&quot;);</span>
+<span class="nc" id="L253">        System.out.println(&quot;Please enter your Username :&quot;);</span>
+<span class="nc" id="L254">        String username = get.nextLine();</span>
+        
+<span class="nc" id="L256">        System.out.println(&quot;Please enter your Contact :&quot;);</span>
+<span class="nc" id="L257">        String contact  = get.nextLine();</span>
+        
+<span class="nc" id="L259">        System.out.println(&quot;Please enter your Password :&quot;);</span>
+<span class="nc" id="L260">        String Password = get.nextLine();    </span>
+<span class="nc" id="L261">        stt.execute(&quot;INSERT INTO customer (Contact,Username,Password) VALUES('&quot;+contact+&quot;','&quot;+username+&quot;','&quot;+Password+&quot;')&quot;);</span>
+<span class="nc" id="L262">        stt.close();</span>
+<span class="nc" id="L263">        con.close();</span>
+        }
+<span class="nc" id="L265">        catch (Exception e)</span>
+        {
+<span class="nc" id="L267">            e.printStackTrace();</span>
+<span class="nc" id="L268">        }</span>
+<span class="nc" id="L269">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

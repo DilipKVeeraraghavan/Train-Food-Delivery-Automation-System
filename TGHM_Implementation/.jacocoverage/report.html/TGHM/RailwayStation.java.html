@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RailwayStation.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">RailwayStation.java</span></div><h1>RailwayStation.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package TGHM;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.naming.AuthenticationException;
+
+/**
+ *
+ * @author DILIPKUMAR
+ */
+public class RailwayStation {
+
+	private String stationName;
+	private String stationCode;
+
+<span class="nc" id="L23">        public RailwayStation(){</span>
+<span class="nc" id="L24">            stationName = &quot;Kharagpur&quot;;</span>
+<span class="nc" id="L25">            stationCode = &quot;721302&quot;;</span>
+<span class="nc" id="L26">        }</span>
+        
+        public RailwayStation(String name,String code)
+<span class="nc" id="L29">        {</span>
+<span class="nc" id="L30">            stationName = name;</span>
+<span class="nc" id="L31">            stationCode = code;</span>
+<span class="nc" id="L32">        }</span>
+         public String getName()
+            {
+<span class="nc" id="L35">                return stationName;</span>
+            }
+         public String getCode()
+         {
+<span class="nc" id="L39">             return stationCode;</span>
+         }
+        public RailwayStation(int Sno) throws UnableToConnectException 
+<span class="nc" id="L42">        {</span>
+<span class="nc" id="L43">            DbConnect conn = null;</span>
+<span class="nc" id="L44">            ResultSet res  = null;</span>
+           
+            try 
+            {
+<span class="nc" id="L48">                conn = new DbConnect(&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L49">                conn.runQuery(&quot;SAVEPOINT saveSeven;&quot;);</span>
+<span class="nc" id="L50">                conn.runQuery(&quot;USE tghm&quot;);</span>
+                
+                /*Check if valid int, if so read*/
+<span class="nc" id="L53">                res = conn.runQuery(&quot;SELECT * FROM  railwaystation WHERE Sno= '&quot;+Sno+&quot;';&quot;);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                if(!res.next())</span>
+                {
+<span class="nc" id="L56">                    throw new IllegalArgumentException(&quot;Invalid Sno,cant read&quot;);</span>
+                }
+                else
+                {
+<span class="nc" id="L60">                    stationName = res.getString(&quot;Name&quot;);</span>
+<span class="nc" id="L61">                    stationCode = res.getString(&quot;Code&quot;);</span>
+                }
+                
+                /*Commit*/
+<span class="nc" id="L65">                conn.runQuery(&quot;COMMIT;&quot;);</span>
+            }
+<span class="nc" id="L67">            catch (ClassNotFoundException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L71">                    conn.runQuery(&quot;ROLLBACK TO saveSeven;&quot;);</span>
+                } 
+<span class="nc" id="L73">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L76">                }</span>
+<span class="nc" id="L77">                ex.printStackTrace();</span>
+<span class="nc" id="L78">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L80">            catch (InstantiationException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L84">                    conn.runQuery(&quot;ROLLBACK TO saveSeven;&quot;);</span>
+                } 
+<span class="nc" id="L86">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L89">                }</span>
+<span class="nc" id="L90">                ex.printStackTrace();</span>
+<span class="nc" id="L91">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L93">            catch (IllegalAccessException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L97">                    conn.runQuery(&quot;ROLLBACK TO saveSeven;&quot;);</span>
+                } 
+<span class="nc" id="L99">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L102">                }</span>
+<span class="nc" id="L103">                ex.printStackTrace();</span>
+<span class="nc" id="L104">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L106">            catch (SQLException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L110">                    conn.runQuery(&quot;ROLLBACK TO saveSeven;&quot;);</span>
+                } 
+<span class="nc" id="L112">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L115">                }</span>
+<span class="nc" id="L116">                ex.printStackTrace();</span>
+<span class="nc" id="L117">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            }
+            finally
+            {
+<span class="nc" id="L121">                try </span>
+                {
+                    /*Close connection*/
+<span class="nc bnc" id="L124" title="All 4 branches missed.">                    if(res!=null)</span>
+<span class="nc" id="L125">                    res.close();</span>
+<span class="nc" id="L126">                    conn.close();</span>
+                } 
+<span class="nc" id="L128">                catch (SQLException ex) </span>
+                {
+                    
+<span class="nc" id="L131">                }</span>
+<span class="nc" id="L132">            }</span>
+<span class="nc" id="L133">        }</span>
+    public RailwayStation(String code) throws UnableToConnectException 
+<span class="nc" id="L135">        {</span>
+<span class="nc" id="L136">            DbConnect conn = null;</span>
+<span class="nc" id="L137">            ResultSet res  = null;</span>
+           
+            try 
+            {
+<span class="nc" id="L141">                conn = new DbConnect(&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L142">                conn.runQuery(&quot;SAVEPOINT saveSeven;&quot;);</span>
+<span class="nc" id="L143">                conn.runQuery(&quot;USE tghm&quot;);</span>
+                
+                /*Check if valid int, if so read*/
+<span class="nc" id="L146">                res = conn.runQuery(&quot;SELECT * FROM  railwaystation WHERE Code= '&quot;+code+&quot;';&quot;);</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">                if(!res.next())</span>
+                {
+<span class="nc" id="L149">                    throw new IllegalArgumentException(&quot;Invalid Code,cant read&quot;);</span>
+                }
+                else
+                {
+<span class="nc" id="L153">                    stationName = res.getString(&quot;Name&quot;);</span>
+<span class="nc" id="L154">                    stationCode = res.getString(&quot;Code&quot;);</span>
+                }
+                
+                /*Commit*/
+<span class="nc" id="L158">                conn.runQuery(&quot;COMMIT;&quot;);</span>
+            }
+<span class="nc" id="L160">            catch (ClassNotFoundException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L164">                    conn.runQuery(&quot;ROLLBACK TO saveSeven;&quot;);</span>
+                } 
+<span class="nc" id="L166">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L169">                }</span>
+<span class="nc" id="L170">                ex.printStackTrace();</span>
+<span class="nc" id="L171">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L173">            catch (InstantiationException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L177">                    conn.runQuery(&quot;ROLLBACK TO saveSeven;&quot;);</span>
+                } 
+<span class="nc" id="L179">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L182">                }</span>
+<span class="nc" id="L183">                ex.printStackTrace();</span>
+<span class="nc" id="L184">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L186">            catch (IllegalAccessException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L190">                    conn.runQuery(&quot;ROLLBACK TO saveSeven;&quot;);</span>
+                } 
+<span class="nc" id="L192">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L195">                }</span>
+<span class="nc" id="L196">                ex.printStackTrace();</span>
+<span class="nc" id="L197">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L199">            catch (SQLException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L203">                    conn.runQuery(&quot;ROLLBACK TO saveSeven;&quot;);</span>
+                } 
+<span class="nc" id="L205">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L208">                }</span>
+<span class="nc" id="L209">                ex.printStackTrace();</span>
+<span class="nc" id="L210">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            }
+            finally
+            {
+<span class="nc" id="L214">                try </span>
+                {
+                    /*Close connection*/
+<span class="nc bnc" id="L217" title="All 4 branches missed.">                    if(res!=null)</span>
+<span class="nc" id="L218">                    res.close();</span>
+<span class="nc" id="L219">                    conn.close();</span>
+                } 
+<span class="nc" id="L221">                catch (SQLException ex) </span>
+                {
+                    
+<span class="nc" id="L224">                }</span>
+<span class="nc" id="L225">            }</span>
+<span class="nc" id="L226">        }    </span>
+    RailwayStation(int code, ManagementAuth ma) throws AuthenticationException, UnableToConnectException 
+<span class="nc" id="L228">    {</span>
+<span class="nc" id="L229">        DbConnect conn = null;</span>
+<span class="nc" id="L230">            ResultSet res  = null;</span>
+<span class="nc" id="L231">            String save = &quot;RailwayStationSave&quot;;            </span>
+            try 
+            {
+<span class="nc" id="L234">                conn = new DbConnect(&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L235">                conn.runQuery(&quot;SAVEPOINT &quot;+save+&quot;;&quot;);</span>
+<span class="nc" id="L236">                conn.runQuery(&quot;USE tghm&quot;);</span>
+                
+                /*Authenticate*/
+<span class="nc" id="L239">                res = conn.runQuery(&quot;SELECT * FROM  management WHERE Username= '&quot;+ma.getUsername()+&quot;';&quot;);</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">                if(!res.next())</span>
+                {
+<span class="nc" id="L242">                    throw new AuthenticationException(&quot;Invalid Username&quot;);</span>
+                }
+<span class="nc bnc" id="L244" title="All 2 branches missed.">                else if( !ma.checkPassword( res.getString(&quot;Password&quot;) ) )</span>
+                {
+<span class="nc" id="L246">                    throw new AuthenticationException(&quot;Username and password don't match&quot;);</span>
+                }
+                
+                
+                /*Get station*/
+<span class="nc" id="L251">                res = conn.runQuery(&quot;SELECT * FROM railwaystation WHERE  code='&quot;+code+&quot;';&quot;);</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">                if(!res.next())</span>
+                {
+<span class="nc" id="L254">                    throw new IllegalArgumentException(&quot;Invalid code&quot;);</span>
+                }
+                else
+                {
+<span class="nc" id="L258">                    stationName = res.getString(&quot;Name&quot;);</span>
+<span class="nc" id="L259">                    stationCode = res.getString(&quot;Code&quot;);</span>
+                }
+               
+                /*Commit*/
+<span class="nc" id="L263">                conn.runQuery(&quot;COMMIT;&quot;);</span>
+            } 
+<span class="nc" id="L265">            catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L269">                    conn.runQuery(&quot;ROLLBACK TO &quot;+save+&quot;;&quot;);</span>
+                } 
+<span class="nc" id="L271">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L274">                }</span>
+<span class="nc" id="L275">                ex.printStackTrace();</span>
+<span class="nc" id="L276">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            }
+            finally
+            {
+<span class="nc" id="L280">                try </span>
+                {
+                    /*Close connection*/
+<span class="nc bnc" id="L283" title="All 4 branches missed.">                    if(res!=null)</span>
+<span class="nc" id="L284">                    res.close();</span>
+<span class="nc bnc" id="L285" title="All 4 branches missed.">                    if(conn!=null)</span>
+<span class="nc" id="L286">                    conn.close();</span>
+                } 
+<span class="nc" id="L288">                catch (SQLException ex) </span>
+                {
+                    
+<span class="nc" id="L291">                }</span>
+<span class="nc" id="L292">            }</span>
+<span class="nc" id="L293">    }</span>
+        
+	public String getStationName() {
+<span class="nc" id="L296">		return this.stationName;</span>
+	}
+        
+        public void setStationName(int stationName) {
+		// TODO - implement RailwayStation.setStationName
+<span class="nc" id="L301">		throw new UnsupportedOperationException();</span>
+	}
+
+	public String getStationCode() {
+<span class="nc" id="L305">		return this.stationCode;</span>
+	}
+           
+	/**
+	 * 
+	 * @param attribute
+	 */
+	public void setStationCode(int attribute) {
+		// TODO - implement RailwayStation.setStationCode
+<span class="nc" id="L314">		throw new UnsupportedOperationException();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

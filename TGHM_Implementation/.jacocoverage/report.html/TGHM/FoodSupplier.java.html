@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FoodSupplier.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">FoodSupplier.java</span></div><h1>FoodSupplier.java</h1><pre class="source lang-java linenums">package TGHM;
+
+
+import TGHM.Cert;
+import TGHM.AgentAuth;
+import TGHM.DbConnect;
+import TGHM.UnableToConnectException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.naming.AuthenticationException;
+
+public class FoodSupplier {
+
+	protected String Name;
+	protected Cert authCert;
+        protected FoodItem food;
+<span class="nc" id="L19">	protected ArrayList&lt;FoodItem&gt; Menu = new ArrayList&lt;FoodItem&gt;();</span>
+        protected String username;
+        protected String password;
+        protected String contact;
+        protected String type;
+        
+        public String getContact()
+        {
+<span class="nc" id="L27">            return contact;</span>
+        }
+         
+        public String getType()
+        {
+<span class="nc" id="L32">            return type;</span>
+        }
+        
+	public String getName() {
+<span class="nc" id="L36">		return Name;</span>
+	}
+<span class="nc" id="L38">        public FoodSupplier(){</span>
+<span class="nc" id="L39">            Name = &quot;KFC&quot;;</span>
+<span class="nc" id="L40">            authCert = new Cert();</span>
+<span class="nc" id="L41">            food =new FoodItem(&quot;Rice&quot;);</span>
+<span class="nc" id="L42">            Menu.add(food);</span>
+<span class="nc" id="L43">            food =new FoodItem();</span>
+<span class="nc" id="L44">            Menu.add(food);</span>
+<span class="nc" id="L45">            food =new FoodItem(&quot;Dal&quot;);</span>
+<span class="nc" id="L46">            Menu.add(food);</span>
+<span class="nc" id="L47">            food =new FoodItem(&quot;Paneer&quot;);</span>
+<span class="nc" id="L48">            Menu.add(food);</span>
+<span class="nc" id="L49">        }</span>
+        public FoodSupplier(String name,Cert cert,ArrayList&lt;FoodItem&gt; menu,String user,String pass,String contactString,String Type)
+<span class="nc" id="L51">        {</span>
+<span class="nc" id="L52">            Name     = name;</span>
+<span class="nc" id="L53">            authCert = cert;</span>
+<span class="nc" id="L54">            Menu     = menu;</span>
+<span class="nc" id="L55">            username = user;</span>
+<span class="nc" id="L56">            password = pass;</span>
+<span class="nc" id="L57">            contact  = contactString;</span>
+<span class="nc" id="L58">            type     = Type;</span>
+<span class="nc" id="L59">        }</span>
+        
+        public FoodSupplier(String username) throws UnableToConnectException,IllegalArgumentException
+<span class="nc" id="L62">        {</span>
+<span class="nc" id="L63">            DbConnect conn = null;</span>
+<span class="nc" id="L64">            ResultSet res  = null;</span>
+            
+            try 
+            {
+<span class="nc" id="L68">                conn = new DbConnect(&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L69">                conn.runQuery(&quot;SAVEPOINT saveFour;&quot;);</span>
+<span class="nc" id="L70">                conn.runQuery(&quot;USE tghm&quot;);</span>
+                
+                /*Check if username exists, if so read*/
+<span class="nc" id="L73">                res = conn.runQuery(&quot;SELECT * FROM  foodsupplier WHERE Username= '&quot;+username+&quot;;&quot;);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                if(!res.next())</span>
+                {
+<span class="nc" id="L76">                    throw new IllegalArgumentException(&quot;Invalid Username&quot;);</span>
+                }
+                else
+                {
+<span class="nc" id="L80">                    Name     = res.getString(&quot;Name&quot;);</span>
+<span class="nc" id="L81">                    authCert = new Cert(res.getString(&quot;authCertPath&quot;));</span>
+<span class="nc" id="L82">                    username = res.getString(&quot;Username&quot;);</span>
+<span class="nc" id="L83">                    password = res.getString(&quot;pass&quot;);</span>
+<span class="nc" id="L84">                    contact  = res.getString(&quot;contactString&quot;);</span>
+<span class="nc" id="L85">                    type     = res.getString(&quot;Type&quot;);</span>
+                    
+                    /*Menu reading*/
+<span class="nc" id="L88">                    ArrayList&lt;String&gt; splitString = new ArrayList&lt;String&gt;(Arrays.asList(res.getString(&quot;Menu&quot;).split(&quot;,&quot;)));</span>
+<span class="nc" id="L89">                    Menu = new ArrayList&lt;FoodItem&gt;();</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">                    for(int i=0;i&lt;splitString.size();i++)</span>
+                    {
+<span class="nc" id="L92">                        FoodItem item = new FoodItem(Integer.parseInt(splitString.get(i)));</span>
+<span class="nc" id="L93">                        Menu.add(item);</span>
+                    }
+                }
+                
+                
+                /*Commit*/
+<span class="nc" id="L99">                conn.runQuery(&quot;COMMIT;&quot;);</span>
+            }
+<span class="nc" id="L101">            catch (ClassNotFoundException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L105">                    conn.runQuery(&quot;ROLLBACK TO saveFour;&quot;);</span>
+                } 
+<span class="nc" id="L107">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L110">                }</span>
+<span class="nc" id="L111">                ex.printStackTrace();</span>
+<span class="nc" id="L112">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L114">            catch (InstantiationException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L118">                    conn.runQuery(&quot;ROLLBACK TO saveFour;&quot;);</span>
+                } 
+<span class="nc" id="L120">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L123">                }</span>
+<span class="nc" id="L124">                ex.printStackTrace();</span>
+<span class="nc" id="L125">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L127">            catch (IllegalAccessException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L131">                    conn.runQuery(&quot;ROLLBACK TO saveFour;&quot;);</span>
+                } 
+<span class="nc" id="L133">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L136">                }</span>
+<span class="nc" id="L137">                ex.printStackTrace();</span>
+<span class="nc" id="L138">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L140">            catch (SQLException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L144">                    conn.runQuery(&quot;ROLLBACK TO saveFour;&quot;);</span>
+                } 
+<span class="nc" id="L146">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L149">                }</span>
+<span class="nc" id="L150">                ex.printStackTrace();</span>
+<span class="nc" id="L151">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            }
+            finally
+            {
+<span class="nc" id="L155">                try </span>
+                {
+                    /*Close connection*/
+<span class="nc bnc" id="L158" title="All 4 branches missed.">                    if(res!=null)</span>
+<span class="nc" id="L159">                    res.close();</span>
+<span class="nc" id="L160">                    conn.close();</span>
+                } 
+<span class="nc" id="L162">                catch (SQLException ex) </span>
+                {
+                    
+<span class="nc" id="L165">                }</span>
+<span class="nc" id="L166">            }</span>
+<span class="nc" id="L167">        }</span>
+        
+        
+        
+        public void sendDetails(ArrayList&lt;RailwayStation&gt; stationList,AgentAuth AA,String foodSupplierUsername) throws UnableToConnectException, AuthenticationException, AlreadySetException
+        {
+<span class="nc" id="L173">            DbConnect conn = null;</span>
+<span class="nc" id="L174">            ResultSet res  = null;</span>
+            
+            try 
+            {
+<span class="nc" id="L178">                int i,numberOfStations = stationList.size();</span>
+<span class="nc" id="L179">                conn = new DbConnect(&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L180">                conn.runQuery(&quot;SAVEPOINT saveTwo;&quot;);</span>
+<span class="nc" id="L181">                conn.runQuery(&quot;USE tghm&quot;);</span>
+<span class="nc" id="L182">                String stations=&quot;&quot;;</span>
+                
+                /*Authenticate*/
+<span class="nc" id="L185">                res = conn.runQuery(&quot;SELECT * FROM agent WHERE Username= '&quot;+AA.getUsername()+&quot;;&quot;);</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">                if(!res.next())</span>
+                {
+<span class="nc" id="L188">                    throw new AuthenticationException(&quot;Invalid Username&quot;);</span>
+                }
+<span class="nc bnc" id="L190" title="All 2 branches missed.">                else if( !AA.checkPassword( res.getString(&quot;Password&quot;) ) )</span>
+                {
+<span class="nc" id="L192">                    throw new AuthenticationException(&quot;Username and password dont match&quot;);</span>
+                }
+<span class="nc bnc" id="L194" title="All 2 branches missed.">                else if( !res.getString(&quot;Status&quot;).equals(&quot;Approved&quot;) )</span>
+                {
+<span class="nc" id="L196">                    throw new AuthenticationException(&quot;Status is : &quot;+res.getString(&quot;Status&quot;)+&quot;.Thus cannot set stations now.&quot;);</span>
+                }
+                
+                
+                /*Check if all station exist in list and valid otherwise throw Invalid argument exception*/
+<span class="nc" id="L201">                numberOfStations = stationList.size();</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">                if(numberOfStations == 0)</span>
+                {
+<span class="nc" id="L204">                    throw new IllegalArgumentException(&quot;Station list can't be empty&quot;);</span>
+                }
+<span class="nc bnc" id="L206" title="All 2 branches missed.">                for( i = 0; i &lt; numberOfStations; i++ )</span>
+                {
+<span class="nc" id="L208">                    res = conn.runQuery(&quot;SELECT * FROM railwaystation WHERE Code = '&quot;+stationList.get(i).getStationCode()+&quot;';&quot;);</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">                    if( !res.next() )</span>
+                    {
+<span class="nc" id="L211">                        throw new IllegalArgumentException(&quot;station : &quot; + stationList.get(i).getStationName()+&quot; is not in our list of stations&quot;);</span>
+                    }
+<span class="nc bnc" id="L213" title="All 2 branches missed.">                    else if( !( res.getString(&quot;Name&quot;).equals(stationList.get(i).getStationName())) )</span>
+                    {
+<span class="nc" id="L215">                        throw new IllegalArgumentException(&quot;station : &quot; + stationList.get(i).getStationName()+&quot; does not match with it's station code&quot;);</span>
+                    }
+                    else
+                    {
+<span class="nc" id="L219">                        stations = stations+stationList.get(i).getStationCode()+&quot;,&quot;;</span>
+                    }
+                }
+                
+                /*Set list in table*/
+<span class="nc" id="L224">                conn.runUpdate(&quot;UPDATE foodsupplier SET Stations='&quot;+stations+&quot;',NumberOfStations='&quot;+stationList.size()+&quot;' WHERE Username='&quot;+foodSupplierUsername+&quot;';&quot;);     </span>
+                
+                /*Commit*/
+<span class="nc" id="L227">                conn.runQuery(&quot;COMMIT;&quot;);</span>
+            } 
+<span class="nc" id="L229">            catch (ClassNotFoundException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L233">                    conn.runQuery(&quot;ROLLBACK TO saveTwo;&quot;);</span>
+                } 
+<span class="nc" id="L235">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L238">                }</span>
+<span class="nc" id="L239">                ex.printStackTrace();</span>
+<span class="nc" id="L240">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L242">            catch (InstantiationException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L246">                    conn.runQuery(&quot;ROLLBACK TO saveTwo;&quot;);</span>
+                } 
+<span class="nc" id="L248">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L251">                }</span>
+<span class="nc" id="L252">                ex.printStackTrace();</span>
+<span class="nc" id="L253">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L255">            catch (IllegalAccessException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L259">                    conn.runQuery(&quot;ROLLBACK TO saveTwo;&quot;);</span>
+                } 
+<span class="nc" id="L261">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L264">                }</span>
+<span class="nc" id="L265">                ex.printStackTrace();</span>
+<span class="nc" id="L266">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L268">            catch (SQLException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L272">                    conn.runQuery(&quot;ROLLBACK TO saveTwo;&quot;);</span>
+                } 
+<span class="nc" id="L274">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L277">                }</span>
+<span class="nc" id="L278">                ex.printStackTrace();</span>
+<span class="nc" id="L279">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            }
+            finally
+            {
+<span class="nc" id="L283">                try </span>
+                {
+                    /*Close connection*/
+<span class="nc" id="L286">                    res.close();</span>
+<span class="nc" id="L287">                    conn.close();</span>
+                } 
+<span class="nc" id="L289">                catch (SQLException ex) </span>
+                {
+                    
+<span class="nc" id="L292">                }</span>
+<span class="nc" id="L293">            }</span>
+            
+            
+            
+<span class="nc" id="L297">        }</span>
+        
+	/**
+	 * 
+	 * @param Name
+	 */
+	public void setName(String Name) {
+		// TODO - implement FoodSupplier.setName
+<span class="nc" id="L305">		throw new UnsupportedOperationException();</span>
+	}
+
+	public Cert getAuthCert() {
+<span class="nc" id="L309">		return this.authCert;</span>
+	}
+
+	/**
+	 * 
+	 * @param cert
+	 */
+	public void setAuthCert(Cert certificate) {
+		// TODO - implement FoodSupplier.setAuthCert
+<span class="nc" id="L318">		throw new UnsupportedOperationException();</span>
+	}
+
+	public ArrayList&lt;FoodItem&gt; getFoodItems() {
+		// TODO - implement FoodSupplier.getFoodItems
+<span class="nc" id="L323">		throw new UnsupportedOperationException();</span>
+	}
+
+	/**
+	 * 
+	 * @param foodItems
+	 */
+	public void setFoodItems(FoodItem[] foodItems) {
+		// TODO - implement FoodSupplier.setFoodItems
+<span class="nc" id="L332">		throw new UnsupportedOperationException();</span>
+	}
+
+	/**
+	 * 
+	 * @param details
+	 */
+	public void setDetails(int details) {
+		// TODO - implement FoodSupplier.setDetails
+<span class="nc" id="L341">		throw new UnsupportedOperationException();</span>
+	}
+
+    String getUsername() {
+<span class="nc" id="L345">        return username;</span>
+    }
+
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

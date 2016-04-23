@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Order.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">Order.java</span></div><h1>Order.java</h1><pre class="source lang-java linenums">package TGHM;
+
+
+import TGHM.RailwayStation;
+
+public class Order {
+    
+        private int sno;
+	private String orderTrain;
+	private String orderStation;
+	private String orderFoodItems;
+	private String orderTimeOfDelivery;
+	private String orderPlaceTime;
+	private String orderStatus;
+        private String Customer;
+        public String getOrderPlaceTime()
+        {
+<span class="nc" id="L18">            return orderPlaceTime;</span>
+        }
+            
+        public String getStatus()
+        {
+<span class="nc" id="L23">                    return orderStatus;</span>
+        }
+        
+        public String getTime()
+        {
+<span class="nc" id="L28">            return orderTimeOfDelivery;</span>
+        }
+        
+        public int getSno()
+        {
+<span class="nc" id="L33">                    return sno;</span>
+        }
+
+	public String getTrain() 
+        {
+<span class="nc" id="L38">		return orderTrain;</span>
+	}
+
+	public String getStation()
+        {
+<span class="nc" id="L43">		return orderStation;</span>
+	}
+
+	
+
+	public String getOrderFoodItems() {
+<span class="nc" id="L49">		return this.orderFoodItems;</span>
+	}
+
+	
+
+	public String getTimeofDelivery() 
+        {
+<span class="nc" id="L56">		return orderTimeOfDelivery;</span>
+	}
+
+	/**
+	 * 
+	 * @param attribute
+	 */
+	public void setAttribute(int attribute) {
+		// TODO - implement Order.setAttribute
+<span class="nc" id="L65">		throw new UnsupportedOperationException();</span>
+	}
+
+	/**
+	 * 
+	 * @param Train
+	 */
+	public void setTrain(int Train) {
+		// TODO - implement Order.setTrain
+<span class="nc" id="L74">		throw new UnsupportedOperationException();</span>
+	}
+
+	public void accepOrdert() {
+		// TODO - implement Order.accepOrdert
+<span class="nc" id="L79">		throw new UnsupportedOperationException();</span>
+	}
+
+	public void getOrderplaceTime() {
+		// TODO - implement Order.getOrderplaceTime
+<span class="nc" id="L84">		throw new UnsupportedOperationException();</span>
+	}
+
+	/**
+	 * 
+	 * @param orderplaceTime
+	 */
+	public void setOrderplaceTime(int orderplaceTime) {
+		// TODO - implement Order.setOrderplaceTime
+<span class="nc" id="L93">		throw new UnsupportedOperationException();</span>
+	}
+
+	public Receipt getGetReceipt() {
+		// TODO - implement Order.getGetReceipt
+<span class="nc" id="L98">		throw new UnsupportedOperationException();</span>
+	}
+
+	/**
+	 * 
+	 * @param getReceipt
+	 */
+	public void setGetReceipt(Receipt getReceipt) {
+		// TODO - implement Order.setGetReceipt
+<span class="nc" id="L107">		throw new UnsupportedOperationException();</span>
+	}
+
+	/**
+	 * 
+	 * @param details
+	 */
+	public Order(int Sno,String train,String station,String orderItems,String status,String placetime,String deliverytime,String customer) 
+<span class="nc" id="L115">        {</span>
+<span class="nc" id="L116">                this.sno = Sno; </span>
+<span class="nc" id="L117">		orderTrain = train;</span>
+<span class="nc" id="L118">                orderStation = station;</span>
+<span class="nc" id="L119">                orderTimeOfDelivery = deliverytime;</span>
+<span class="nc" id="L120">                this.orderFoodItems = orderItems;</span>
+<span class="nc" id="L121">                orderStatus = status;</span>
+<span class="nc" id="L122">                this.orderPlaceTime = placetime;</span>
+<span class="nc" id="L123">                Customer = customer;</span>
+<span class="nc" id="L124">	}</span>
+
+	public String getCustomer()
+        {
+            
+<span class="nc" id="L129">            return Customer;</span>
+        }
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

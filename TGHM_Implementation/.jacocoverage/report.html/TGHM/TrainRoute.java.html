@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TrainRoute.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">TrainRoute.java</span></div><h1>TrainRoute.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package TGHM;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.naming.AuthenticationException;
+
+public class TrainRoute {
+
+        private String Sno;
+	private String routeName;
+	private ArrayList&lt;RailwayStation&gt; routeRailwayStations;
+	private int routeSuccessfulDeliveries;
+	private int routeTotalDeliveries;
+        public int getSuccess()
+        {
+<span class="nc" id="L23">            return routeSuccessfulDeliveries;</span>
+        }
+        public String getSno()
+        {
+<span class="nc" id="L27">            return Sno;</span>
+        }
+
+        TrainRoute(int routeSno,ManagementAuth ma) throws AuthenticationException, UnableToConnectException 
+<span class="nc" id="L31">        {</span>
+<span class="nc" id="L32">            Sno = Integer.toString(routeSno);</span>
+<span class="nc" id="L33">            DbConnect conn = null;</span>
+<span class="nc" id="L34">            ResultSet res  = null;</span>
+<span class="nc" id="L35">            String save = &quot;TrainRouteSave&quot;;            </span>
+            try 
+            {
+<span class="nc" id="L38">                conn = new DbConnect(&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L39">                conn.runQuery(&quot;SAVEPOINT &quot;+save+&quot;;&quot;);</span>
+<span class="nc" id="L40">                conn.runQuery(&quot;USE tghm&quot;);</span>
+                
+                /*Authenticate*/
+<span class="nc" id="L43">                res = conn.runQuery(&quot;SELECT * FROM  management WHERE Username= '&quot;+ma.getUsername()+&quot;';&quot;);</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">                if(!res.next())</span>
+                {
+<span class="nc" id="L46">                    throw new AuthenticationException(&quot;Invalid Username&quot;);</span>
+                }
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                else if( !ma.checkPassword( res.getString(&quot;Password&quot;) ) )</span>
+                {
+<span class="nc" id="L50">                    throw new AuthenticationException(&quot;Username and password don't match&quot;);</span>
+                }
+                
+                
+                /*Get route*/
+<span class="nc" id="L55">                res = conn.runQuery(&quot;SELECT * FROM  trainroute WHERE Sno = '&quot;+routeSno+&quot;';&quot;);</span>
+<span class="nc" id="L56">                res.next();</span>
+<span class="nc" id="L57">                routeName = res.getString(&quot;Name&quot;);</span>
+<span class="nc" id="L58">                routeSuccessfulDeliveries = Integer.parseInt(res.getString(&quot;SuccessNumber&quot;));</span>
+<span class="nc" id="L59">                routeTotalDeliveries = Integer.parseInt(res.getString(&quot;TotalNumber&quot;));</span>
+<span class="nc" id="L60">                String stationsString = res.getString(&quot;Stations&quot;);</span>
+<span class="nc" id="L61">                ArrayList&lt;String&gt; split= new ArrayList&lt;&gt;(Arrays.asList(stationsString.split(&quot;,&quot;)));</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                for (String split1 : split) </span>
+                {
+<span class="nc" id="L64">                    RailwayStation rs = new RailwayStation(Integer.parseInt(split1),ma);</span>
+<span class="nc" id="L65">                }</span>
+                
+                /*Commit*/
+<span class="nc" id="L68">                conn.runQuery(&quot;COMMIT;&quot;);</span>
+            } 
+<span class="nc" id="L70">            catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L74">                    conn.runQuery(&quot;ROLLBACK TO &quot;+save+&quot;;&quot;);</span>
+                } 
+<span class="nc" id="L76">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L79">                }</span>
+<span class="nc" id="L80">                ex.printStackTrace();</span>
+<span class="nc" id="L81">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            }
+            finally
+            {
+<span class="nc" id="L85">                try </span>
+                {
+                    /*Close connection*/
+<span class="nc bnc" id="L88" title="All 4 branches missed.">                    if(res!=null)</span>
+<span class="nc" id="L89">                    res.close();</span>
+<span class="nc bnc" id="L90" title="All 4 branches missed.">                    if(conn!=null)</span>
+<span class="nc" id="L91">                    conn.close();</span>
+                } 
+<span class="nc" id="L93">                catch (SQLException ex) </span>
+                {
+                    
+<span class="nc" id="L96">                }</span>
+<span class="nc" id="L97">            }</span>
+<span class="nc" id="L98">        }</span>
+        
+        public String getName()
+        {
+<span class="nc" id="L102">            return routeName;</span>
+        }
+        
+        public ArrayList&lt;RailwayStation&gt; getStations()
+        {
+<span class="nc" id="L107">            return routeRailwayStations;</span>
+        }
+        
+        public int getTotalDeliveries()
+        {
+<span class="nc" id="L112">            return routeTotalDeliveries;</span>
+        }
+        
+        public int routeSucessfulDeliveries()
+        {
+<span class="nc" id="L117">            return routeSuccessfulDeliveries;</span>
+        }
+
+        
+//        public TrainRoute(String name,ArrayList&lt;RailwayStation&gt; stations,int sucess,int total)
+//        {
+//            routeName                 = name;
+//            routeRailwayStations      = stations;
+//            routeSuccessfulDeliveries = sucess;
+//            routeTotalDeliveries      = total;
+//            Sno                       = &quot;-1&quot;;
+//        }
+        
+         public TrainRoute(String name,ArrayList&lt;RailwayStation&gt; stations,int sucess,int total,String sno)
+<span class="nc" id="L131">        {</span>
+<span class="nc" id="L132">            routeName                 = name;</span>
+<span class="nc" id="L133">            routeRailwayStations      = stations;</span>
+<span class="nc" id="L134">            routeSuccessfulDeliveries = sucess;</span>
+<span class="nc" id="L135">            routeTotalDeliveries      = total;</span>
+<span class="nc" id="L136">            Sno                       = sno;</span>
+<span class="nc" id="L137">        }</span>
+        
+        
+     
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

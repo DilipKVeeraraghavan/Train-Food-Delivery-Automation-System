@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Agent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">Agent.java</span></div><h1>Agent.java</h1><pre class="source lang-java linenums">package TGHM;
+
+
+import TGHM.DbConnect;
+import TGHM.UnableToConnectException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
+public class Agent 
+{
+
+	private String Name;
+	private String agentFoodSupplier;
+	private int agentNumberOfOrdersAccepted;
+	private int agentNumberOfSuccesfullOrders;
+	private String ContactDetails;
+        private String username;
+        private String password;
+
+        public Agent(String agentName, String agentContact, String agentUsername, String agentPassword, String supplierUsername) 
+<span class="nc" id="L22">        {</span>
+<span class="nc" id="L23">            Name                          = agentName;</span>
+<span class="nc" id="L24">            ContactDetails                = agentContact;</span>
+<span class="nc" id="L25">            username                      = agentUsername;</span>
+<span class="nc" id="L26">            password                      = agentPassword;</span>
+<span class="nc" id="L27">            agentFoodSupplier             = supplierUsername;</span>
+<span class="nc" id="L28">            agentNumberOfOrdersAccepted   = 0;</span>
+<span class="nc" id="L29">            agentNumberOfSuccesfullOrders = 0;</span>
+<span class="nc" id="L30">        }</span>
+        
+        public void storeInDb() throws UnableToConnectException
+        {
+<span class="nc" id="L34">            DbConnect conn = null;</span>
+<span class="nc" id="L35">            ResultSet res  = null;</span>
+            try 
+            {
+<span class="nc" id="L38">                conn = new DbConnect(&quot;root&quot;,&quot;&quot;);</span>
+<span class="nc" id="L39">                conn.runQuery(&quot;SAVEPOINT saveOne;&quot;);</span>
+<span class="nc" id="L40">                conn.runQuery(&quot;USE tghm&quot;);</span>
+
+                /*Now store the agent in db*/
+<span class="nc" id="L43">                conn.runUpdate(&quot;INSERT INTO agent (Name,SucessOrders,TotalOrders,FoodSupplierUsername,Contact,Username,Password) VALUES ('&quot;+Name+&quot;','&quot;+agentNumberOfSuccesfullOrders+&quot;','&quot;+agentNumberOfOrdersAccepted+&quot;','&quot;+agentFoodSupplier+&quot;','&quot;+ContactDetails+&quot;','&quot;+username+&quot;','&quot;+password+&quot;');&quot;);     </span>
+                
+                /*Commit*/
+<span class="nc" id="L46">                conn.runQuery(&quot;COMMIT;&quot;);</span>
+            } 
+<span class="nc" id="L48">            catch (ClassNotFoundException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L52">                    conn.runQuery(&quot;ROLLBACK TO saveOne;&quot;);</span>
+                } 
+<span class="nc" id="L54">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L57">                }</span>
+<span class="nc" id="L58">                ex.printStackTrace();</span>
+<span class="nc" id="L59">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L61">            catch (InstantiationException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L65">                    conn.runQuery(&quot;ROLLBACK TO saveOne;&quot;);</span>
+                } 
+<span class="nc" id="L67">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L70">                }</span>
+<span class="nc" id="L71">                ex.printStackTrace();</span>
+<span class="nc" id="L72">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L74">            catch (IllegalAccessException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L78">                    conn.runQuery(&quot;ROLLBACK TO saveOne;&quot;);</span>
+                } 
+<span class="nc" id="L80">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L83">                }</span>
+<span class="nc" id="L84">                ex.printStackTrace();</span>
+<span class="nc" id="L85">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            } 
+<span class="nc" id="L87">            catch (SQLException ex) </span>
+            {
+                try 
+                {
+<span class="nc" id="L91">                    conn.runQuery(&quot;ROLLBACK TO saveOne;&quot;);</span>
+                } 
+<span class="nc" id="L93">                catch (SQLException ex1) </span>
+                {
+                    
+<span class="nc" id="L96">                }</span>
+<span class="nc" id="L97">                ex.printStackTrace();</span>
+<span class="nc" id="L98">                throw new UnableToConnectException(&quot;Unable to connect&quot;);</span>
+            }
+            finally
+            {
+<span class="nc" id="L102">                try </span>
+                {
+                    /*Close connection*/
+<span class="nc bnc" id="L105" title="All 4 branches missed.">                    if(res!=null)</span>
+<span class="nc" id="L106">                    res.close();</span>
+<span class="nc" id="L107">                    conn.close();</span>
+                } 
+<span class="nc" id="L109">                catch (Exception ex) </span>
+                {
+                    
+<span class="nc" id="L112">                }</span>
+<span class="nc" id="L113">            }</span>
+<span class="nc" id="L114">        }</span>
+        public String getContact()
+        {
+<span class="nc" id="L117">            return ContactDetails;</span>
+        }
+
+	public String getName() {
+<span class="nc" id="L121">		return Name;</span>
+	}
+
+	/**
+	 * 
+	 * @param Name
+	 */
+	
+	public String getAgentFoodSupplier() 
+        {
+<span class="nc" id="L131">		return agentFoodSupplier;</span>
+	}
+
+	
+
+	public int getTotalDeliveries() 
+        {
+<span class="nc" id="L138">		return agentNumberOfOrdersAccepted;</span>
+	}
+
+	/**
+	 * 
+	 * @param agentNumberOfOrdersAccepted
+	 */
+	public void setAgentNumberOfOrdersAccepted(int agentNumberOfOrdersAccepted) {
+<span class="nc" id="L146">		this.agentNumberOfOrdersAccepted = agentNumberOfOrdersAccepted;</span>
+<span class="nc" id="L147">	}</span>
+
+	public int getSuccesfullDeliveries() 
+        {
+<span class="nc" id="L151">		return agentNumberOfSuccesfullOrders;</span>
+	}
+
+	/**
+	 * 
+	 * @param agentNumberOfSuccesfulOrders
+	 */
+	
+        
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

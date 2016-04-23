@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>routes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;TGHM_CombinedTharun&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">TGHM</a> &gt; <span class="el_source">routes.java</span></div><h1>routes.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package TGHM;
+
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.AuthenticationException;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author THARUN
+ */
+public class routes extends javax.swing.JPanel {
+
+    /**
+     * Creates new form routes
+     */
+    private ArrayList&lt;TrainRoute&gt; routes;
+    private ManagementAuth ma;
+    private ArrayList&lt;RailwayStation&gt; stations;
+<span class="nc" id="L29">    private ArrayList&lt;RailwayStation&gt; added = new ArrayList&lt;&gt;();</span>
+    private void refresh()
+    {
+        try 
+        {
+            /*routes list**/
+<span class="nc" id="L35">            routes = Management.getRoutes(ma);</span>
+<span class="nc" id="L36">            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();</span>
+<span class="nc" id="L37">            model.setRowCount(0);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            for(int i = 0;i &lt;routes.size();i++)</span>
+            {
+<span class="nc" id="L40">                String stations = &quot;&quot;;</span>
+<span class="nc" id="L41">                TrainRoute route  = routes.get(i);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">                for(int j=0;j&lt;route.getStations().size();j++)</span>
+                {
+<span class="nc" id="L44">                    stations = stations+route.getStations().get(j).getName()+&quot;(&quot;+route.getStations().get(j).getCode()+&quot;),&quot;;</span>
+                }
+<span class="nc" id="L46">                model.addRow(new Object[]{Integer.toString(i+1),route.getName(),route.getSuccess(),route.getTotalDeliveries(),stations});</span>
+            }
+            
+            
+            /*Stations list*/
+<span class="nc" id="L51">            stations = Management.getStations(ma);</span>
+<span class="nc" id="L52">            DefaultListModel sourceModel = new DefaultListModel();</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            for (int i = 0;i&lt;stations.size();i++) </span>
+            {
+<span class="nc" id="L55">                sourceModel.addElement(stations.get(i).getName()+&quot;(&quot;+stations.get(i).getCode()+&quot;)&quot;);</span>
+            }
+<span class="nc" id="L57">            source.setModel(sourceModel);</span>
+<span class="nc" id="L58">            validate();</span>
+<span class="nc" id="L59">            repaint();</span>
+            
+            /*Refresh the list*/
+<span class="nc" id="L62">            DefaultListModel destModel = new DefaultListModel();</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            for (int i = 0;i&lt;added.size();i++) </span>
+            {
+<span class="nc" id="L65">                destModel.addElement(added.get(i).getName()+&quot;(&quot;+added.get(i).getCode()+&quot;)&quot;);</span>
+            }
+<span class="nc" id="L67">            destination.setModel(destModel);</span>
+<span class="nc" id="L68">            nameField.setText(&quot;&quot;);</span>
+<span class="nc" id="L69">            validate();</span>
+<span class="nc" id="L70">            repaint();</span>
+        } 
+<span class="nc" id="L72">        catch (AuthenticationException | UnableToConnectException | IllegalArgumentException ex) </span>
+        {
+<span class="nc" id="L74">            JOptionPane.showMessageDialog(null, ex.getMessage());</span>
+<span class="nc" id="L75">            ex.printStackTrace();</span>
+<span class="nc" id="L76">        }</span>
+<span class="nc" id="L77">    }</span>
+    public routes(ManagementAuth mauth) 
+<span class="nc" id="L79">    {</span>
+        
+<span class="nc" id="L81">        ma = mauth;</span>
+<span class="nc" id="L82">        initComponents();</span>
+<span class="nc" id="L83">        source.setModel(new DefaultListModel());</span>
+<span class="nc" id="L84">        destination.setModel(new DefaultListModel());</span>
+          
+        try 
+        {
+            /*routes list**/
+<span class="nc" id="L89">            routes = Management.getRoutes(ma);</span>
+<span class="nc" id="L90">            DefaultTableModel model = (DefaultTableModel)jTable1.getModel();</span>
+<span class="nc" id="L91">            model.setRowCount(0);</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            for(int i = 0;i &lt;routes.size();i++)</span>
+            {
+<span class="nc" id="L94">                String stations = &quot;&quot;;</span>
+<span class="nc" id="L95">                TrainRoute route  = routes.get(i);</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                for(int j=0;j&lt;route.getStations().size();j++)</span>
+                {
+<span class="nc" id="L98">                    stations = stations+route.getStations().get(j).getName()+&quot;(&quot;+route.getStations().get(j).getCode()+&quot;),&quot;;</span>
+                }
+<span class="nc" id="L100">                model.addRow(new Object[]{Integer.toString(i+1),route.getName(),route.getSuccess(),route.getTotalDeliveries(),stations});</span>
+            }
+            
+            /*Stations list*/
+<span class="nc" id="L104">            stations = Management.getStations(ma);</span>
+<span class="nc" id="L105">            DefaultListModel sourceModel = new DefaultListModel();</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            for (int i = 0;i&lt;stations.size();i++) </span>
+            {
+<span class="nc" id="L108">                sourceModel.addElement(stations.get(i).getName()+&quot;(&quot;+stations.get(i).getCode()+&quot;)&quot;);</span>
+            }
+<span class="nc" id="L110">            source.setModel(sourceModel);</span>
+<span class="nc" id="L111">            validate();</span>
+<span class="nc" id="L112">            repaint();</span>
+        } 
+<span class="nc" id="L114">        catch (AuthenticationException | UnableToConnectException | IllegalArgumentException ex) </span>
+        {
+<span class="nc" id="L116">            JOptionPane.showMessageDialog(null, ex.getMessage());</span>
+<span class="nc" id="L117">            ex.printStackTrace();</span>
+<span class="nc" id="L118">        }</span>
+<span class="nc" id="L119">    }</span>
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L130">        jScrollPane1 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L131">        jTable1 = new javax.swing.JTable();</span>
+<span class="nc" id="L132">        jLabel1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L133">        jButton1 = new javax.swing.JButton();</span>
+<span class="nc" id="L134">        jButton2 = new javax.swing.JButton();</span>
+<span class="nc" id="L135">        jLabel2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L136">        jLabel3 = new javax.swing.JLabel();</span>
+<span class="nc" id="L137">        jTextField1 = new javax.swing.JTextField();</span>
+<span class="nc" id="L138">        jButton3 = new javax.swing.JButton();</span>
+<span class="nc" id="L139">        jScrollPane4 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L140">        destination = new javax.swing.JList&lt;&gt;();</span>
+<span class="nc" id="L141">        jScrollPane5 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L142">        source = new javax.swing.JList&lt;&gt;();</span>
+<span class="nc" id="L143">        jLabel4 = new javax.swing.JLabel();</span>
+<span class="nc" id="L144">        nameField = new javax.swing.JTextField();</span>
+
+<span class="nc" id="L146">        setBorder(javax.swing.BorderFactory.createEtchedBorder());</span>
+
+<span class="nc" id="L148">        jTable1.setModel(new javax.swing.table.DefaultTableModel(</span>
+            new Object [][] {
+
+            },
+            new String [] {
+                &quot;Sno&quot;, &quot;Name&quot;, &quot;SucessFull Orders&quot;, &quot;Total Orders&quot;, &quot;Stations&quot;
+            }
+<span class="nc" id="L155">        ) {</span>
+<span class="nc" id="L156">            Class[] types = new Class [] {</span>
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+<span class="nc" id="L159">            boolean[] canEdit = new boolean [] {</span>
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+<span class="nc" id="L164">                return types [columnIndex];</span>
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+<span class="nc" id="L168">                return canEdit [columnIndex];</span>
+            }
+        });
+<span class="nc" id="L171">        jScrollPane1.setViewportView(jTable1);</span>
+
+<span class="nc" id="L173">        jLabel1.setText(&quot;Add route&quot;);</span>
+
+<span class="nc" id="L175">        jButton1.setText(&quot;Add station&quot;);</span>
+<span class="nc" id="L176">        jButton1.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L178">                jButton1ActionPerformed(evt);</span>
+<span class="nc" id="L179">            }</span>
+        });
+
+<span class="nc" id="L182">        jButton2.setText(&quot;Add new route&quot;);</span>
+<span class="nc" id="L183">        jButton2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L185">                jButton2ActionPerformed(evt);</span>
+<span class="nc" id="L186">            }</span>
+        });
+
+<span class="nc" id="L189">        jLabel2.setText(&quot;Delete route&quot;);</span>
+
+<span class="nc" id="L191">        jLabel3.setText(&quot;Sno&quot;);</span>
+
+<span class="nc" id="L193">        jButton3.setText(&quot;Delete route&quot;);</span>
+
+<span class="nc" id="L195">        destination.setModel(new javax.swing.AbstractListModel&lt;String&gt;() {</span>
+<span class="nc" id="L196">            String[] strings = { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot;, &quot;Item 5&quot; };</span>
+<span class="nc" id="L197">            public int getSize() { return strings.length; }</span>
+<span class="nc" id="L198">            public String getElementAt(int i) { return strings[i]; }</span>
+        });
+<span class="nc" id="L200">        jScrollPane4.setViewportView(destination);</span>
+
+<span class="nc" id="L202">        source.setModel(new javax.swing.AbstractListModel&lt;String&gt;() {</span>
+<span class="nc" id="L203">            String[] strings = { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot;, &quot;Item 5&quot; };</span>
+<span class="nc" id="L204">            public int getSize() { return strings.length; }</span>
+<span class="nc" id="L205">            public String getElementAt(int i) { return strings[i]; }</span>
+        });
+<span class="nc" id="L207">        jScrollPane5.setViewportView(source);</span>
+
+<span class="nc" id="L209">        jLabel4.setText(&quot;Name&quot;);</span>
+
+<span class="nc" id="L211">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);</span>
+<span class="nc" id="L212">        this.setLayout(layout);</span>
+<span class="nc" id="L213">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L214">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L215">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L216">                .addGap(22, 22, 22)</span>
+<span class="nc" id="L217">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L218">                    .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L219">                        .addComponent(jLabel4)</span>
+<span class="nc" id="L220">                        .addGap(72, 72, 72)</span>
+<span class="nc" id="L221">                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L222">                    .addComponent(jLabel2)</span>
+<span class="nc" id="L223">                    .addComponent(jButton3)</span>
+<span class="nc" id="L224">                    .addComponent(jButton2)</span>
+<span class="nc" id="L225">                    .addComponent(jLabel1)</span>
+<span class="nc" id="L226">                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L227">                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L228">                        .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L229">                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L230">                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L231">                            .addComponent(jButton1)</span>
+<span class="nc" id="L232">                            .addGap(36, 36, 36)</span>
+<span class="nc" id="L233">                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L234">                    .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L235">                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L236">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L237">                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L238">                .addContainerGap(22, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L240">        layout.setVerticalGroup(</span>
+<span class="nc" id="L241">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L242">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L243">                .addContainerGap()</span>
+<span class="nc" id="L244">                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L245">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L246">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L247">                    .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L248">                        .addGap(145, 145, 145)</span>
+<span class="nc" id="L249">                        .addComponent(jButton1))</span>
+<span class="nc" id="L250">                    .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L251">                        .addComponent(jLabel1)</span>
+<span class="nc" id="L252">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L253">                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L254">                            .addComponent(jLabel4)</span>
+<span class="nc" id="L255">                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L256">                        .addGap(21, 21, 21)</span>
+<span class="nc" id="L257">                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L258">                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L259">                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))</span>
+<span class="nc" id="L260">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L261">                .addComponent(jButton2)</span>
+<span class="nc" id="L262">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L263">                .addComponent(jLabel2)</span>
+<span class="nc" id="L264">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L265">                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L266">                    .addComponent(jLabel3)</span>
+<span class="nc" id="L267">                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L268">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L269">                .addComponent(jButton3)</span>
+<span class="nc" id="L270">                .addGap(83, 83, 83))</span>
+        );
+<span class="nc" id="L272">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+<span class="nc bnc" id="L275" title="All 2 branches missed.">        if(source.getSelectedIndex()==-1)</span>
+        {
+<span class="nc" id="L277">            JOptionPane.showMessageDialog(null, &quot;Please select station before adding&quot;);</span>
+<span class="nc" id="L278">            JOptionPane.showMessageDialog(null, source.getSelectedIndex());</span>
+        }
+<span class="nc bnc" id="L280" title="All 2 branches missed.">        else if(added.contains(stations.get(source.getSelectedIndex())))   </span>
+        {
+<span class="nc" id="L282">            JOptionPane.showMessageDialog(null, &quot;Station already added&quot;);</span>
+        }
+        else
+        {
+<span class="nc" id="L286">            added.add(stations.get(source.getSelectedIndex()));</span>
+<span class="nc" id="L287">            DefaultListModel destModel = new DefaultListModel();</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">            for (int i = 0;i&lt;added.size();i++) </span>
+            {
+<span class="nc" id="L290">                destModel.addElement(added.get(i).getName()+&quot;(&quot;+added.get(i).getCode()+&quot;)&quot;);</span>
+            }
+<span class="nc" id="L292">            destination.setModel(destModel);</span>
+<span class="nc" id="L293">            validate();</span>
+<span class="nc" id="L294">            repaint();</span>
+        }
+<span class="nc" id="L296">    }//GEN-LAST:event_jButton1ActionPerformed</span>
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+<span class="nc bnc" id="L299" title="All 2 branches missed.">        if(added.size()&lt;2)</span>
+        {
+<span class="nc" id="L301">            JOptionPane.showMessageDialog(null, &quot;Atleast 2 stations is neccesary&quot;);</span>
+        }
+<span class="nc bnc" id="L303" title="All 2 branches missed.">        else if(nameField.getText().equals(&quot;&quot;))</span>
+        {
+<span class="nc" id="L305">            JOptionPane.showMessageDialog(null, &quot;Station name cannot be empty&quot;);</span>
+        }
+        else
+        {
+            try 
+            {
+<span class="nc" id="L311">                Management.addRoute(ma,nameField.getText(),added);</span>
+<span class="nc" id="L312">                added = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L313">                refresh();</span>
+            } 
+<span class="nc" id="L315">            catch (AuthenticationException | UnableToConnectException | IllegalArgumentException ex) </span>
+            {
+<span class="nc" id="L317">                JOptionPane.showMessageDialog(null, ex.getMessage());</span>
+<span class="nc" id="L318">            }</span>
+        }
+<span class="nc" id="L320">    }//GEN-LAST:event_jButton2ActionPerformed</span>
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList&lt;String&gt; destination;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JList&lt;String&gt; source;
+    // End of variables declaration//GEN-END:variables
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
